@@ -1,8 +1,20 @@
-import '@/styles/globals.css';
-import type { AppProps } from 'next/app';
 
-const App = ({ Component, pageProps }: AppProps) => {
-  return <Component {...pageProps} />;
+import { SessionProvider } from "next-auth/react"
+import type { AppProps } from 'next/app';
+import { Provider } from 'jotai'
+import { Layout } from '@/layouts';
+
+const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
+  return (
+    <SessionProvider session={session}>
+      <Provider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Provider>
+    </SessionProvider>
+  );
+
 };
 
 export default App;

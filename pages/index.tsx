@@ -1,5 +1,25 @@
+
+import {useSession, signIn} from 'next-auth/react';
+
 const Home = () => {
-  return <main className='h-screen w-full flex items-center justify-center'>Hola mundo</main>;
+  const {data, status} = useSession();
+  return (
+    <main>
+      {status === 'authenticated' ?(
+        
+        <h1>Sistema de gestión de inventarios</h1>
+      ): (
+        <div>
+          <button onClick={() =>{
+            signIn('auth0');}}>
+            Iniciar Sesion
+          </button>
+        </div>
+      )}
+      
+
+    </main>
+  );
 };
 
 export default Home;
