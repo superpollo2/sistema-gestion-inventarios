@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { HiOutlineArrowCircleRight } from "react-icons/hi";
 
-const FooterSide = () => {
+const SideFooter = () => {
   return (
     <footer>
       <Link
@@ -18,4 +18,4 @@ const FooterSide = () => {
   );
 };
 
-export { FooterSide };
+export { SideFooter };

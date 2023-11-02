@@ -2,21 +2,18 @@ import React, { useState } from "react";
 import { UserProfile } from "./UserProfile";
 import { SidebarNavigation } from "./SidebarNav";
 import { MobileMenuIcon } from "./MobileMenuIcon";
-import { FooterSide } from "./FooterSide";
+import { SideFooter } from "./SideFooter";
 
 const SideNavigationUserProfile = () => {
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
 
   return (
     <div className="fixed ">
-      {/*  <!-- Component: Side navigation menu with user profile and alert message --> */}
       {/*  <!-- Mobile trigger --> */}
-
       <MobileMenuIcon
         isSideNavOpen={isSideNavOpen}
         onClick={() => setIsSideNavOpen((prev) => !prev)}
       />
-      {/*  <!-- Side Navigation --> */}
       <aside
         id="nav-menu-4"
         aria-label="Side navigation"
@@ -26,7 +23,7 @@ const SideNavigationUserProfile = () => {
       >
         <UserProfile />
         <SidebarNavigation />
-        <FooterSide />
+        <SideFooter />
       </aside>
 
       <button
