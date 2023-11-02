@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { useSession } from 'next-auth/react';
-
+import { SideNavigationUserProfile } from '@/components/ui/Side/side'
 
 
 interface LayoutProps {
@@ -17,8 +16,10 @@ const Layout = ({ children }: LayoutProps) => {
 
   if (status === 'authenticated') {
     return (
-      <main>
-        <h1>Layout</h1>
+
+      <main className='flex flex-row'>
+        <SideNavigationUserProfile />
+        {children}
       </main>
 
     )
@@ -35,3 +36,7 @@ const PublicLayout = ({ children }: LayoutProps) => {
 }
 
 export { Layout }
+
+
+
+
