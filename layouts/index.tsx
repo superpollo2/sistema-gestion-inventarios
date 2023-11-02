@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSession } from 'next-auth/react';
-import { SideNavigationUserProfile } from '@/components/ui/Side/side'
+import { SideNavigationUserProfile } from '@/components/ui/Side'
 
 
 interface LayoutProps {
@@ -8,7 +8,7 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const { data, status } = useSession();
+  const { status } = useSession();
 
   if (status === 'loading') {
     return <h1>Loading...</h1>

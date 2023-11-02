@@ -1,5 +1,7 @@
 import Link from "next/link"
 import React, { useState } from "react"
+import { UserProfile } from "./UserProfile"
+import { SidebarNavigation } from "./SidebarNav"
 
 const SideNavigationUserProfile = () => {
   const [isSideNavOpen, setIsSideNavOpen] = useState(false)
@@ -8,6 +10,7 @@ const SideNavigationUserProfile = () => {
     <>
       {/*  <!-- Component: Side navigation menu with user profile and alert message --> */}
       {/*  <!-- Mobile trigger --> */}
+      <SidebarNavigation/>
       <button
         title="Side navigation"
         type="button"
