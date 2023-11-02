@@ -1,9 +1,14 @@
-const materials = () => {
-    return (
-        <div className="flex items-center justify-center w-full h-screen bg-gradient-to-r to-blue-800 from-white">
-            <h1 className="text-3xl font-bold">Materials Page</h1>
-        </div>
-    )
-}
+import React from "react";
+import { SingInUser } from "@/components/SingInUser";
 
-export default materials
+const materials = () => {
+  return (
+    <>
+      <SingInUser>
+        <h1 className="text-3xl font-bold">Materials Page</h1>
+      </SingInUser>
+    </>
+  );
+};
+
+export default materials;

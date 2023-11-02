@@ -29,7 +29,8 @@ const Layout = ({ children }: LayoutProps) => {
 
 const PublicLayout = ({ children }: LayoutProps) => {
   return (
-    <main>
+    <main className='bg-gradient-to-r to-blue-800 from-white w-full"'>
+      
       {children}
     </main>
   )
