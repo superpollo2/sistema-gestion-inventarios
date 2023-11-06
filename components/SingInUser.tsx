@@ -1,18 +1,18 @@
 import { useSession, signIn } from "next-auth/react";
 
 
-interface SingInProps{
-    children: React.ReactNode;
+interface SingInProps {
+  children: React.ReactNode;
 }
-const SingInUser = ({children}:SingInProps) => {
-  const {  status } = useSession();
-  
+const SingInUser = ({ children }: SingInProps) => {
+  const { status } = useSession();
+
   return (
-    <div>
+    <div className=" w-screen ">
       {status === "authenticated" ? (
-        <>
+        <div className="flex items-center justify-center w-full h-full bg-slate-50">
           {children}
-        </>
+        </div>
       ) : (
         <div>
           <div className="w-full h-screen bg-gradient-to-r to-blue-800 from-white flex items-center justify-center">
@@ -37,4 +37,4 @@ const SingInUser = ({children}:SingInProps) => {
   );
 };
 
-export {SingInUser}
+export { SingInUser }

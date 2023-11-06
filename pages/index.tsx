@@ -3,11 +3,11 @@ import { SingInUser } from "@/components/SingInUser";
 
 const Home = () => {
   return (
-    <>
-      <SingInUser>
-        <h1>autenticad xdvsfsdfsadfasdfasdfo</h1>
-      </SingInUser>
-    </>
+
+    <SingInUser>
+      <h1>autenticated</h1>
+    </SingInUser>
+
   );
 };
 

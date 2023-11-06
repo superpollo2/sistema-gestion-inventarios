@@ -17,7 +17,7 @@ const Layout = ({ children }: LayoutProps) => {
   if (status === 'authenticated') {
     return (
 
-      <main className='flex flex-row'>
+      <main className='flex'>
         <SideNavigationUserProfile />
         {children}
       </main>
@@ -29,8 +29,7 @@ const Layout = ({ children }: LayoutProps) => {
 
 const PublicLayout = ({ children }: LayoutProps) => {
   return (
-    <main className='bg-gradient-to-r to-blue-800 from-white w-full"'>
-      
+    <main>
       {children}
     </main>
   )
