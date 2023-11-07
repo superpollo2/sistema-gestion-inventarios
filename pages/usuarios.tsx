@@ -1,12 +1,14 @@
 import React from "react";
-import { SingInUser } from "@/components/SingInUser";
+import { PrivateRoute  } from "@/components/PrivateRoute";
+import { ProtectedComponent } from "@/components/ProtectedComponent";
 
 const users = () => {
   return (
-
-    <SingInUser>
+    <PrivateRoute >
+      <ProtectedComponent roleName="ADMIN">
       <h1 className="text-3xl font-bold">Users Page</h1>
-    </SingInUser>
+      </ProtectedComponent>
+    </PrivateRoute >
 
   );
 };

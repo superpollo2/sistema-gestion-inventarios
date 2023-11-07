@@ -1,12 +1,12 @@
 import React from "react";
-import { SingInUser } from "@/components/SingInUser";
+import { PrivateRoute  } from "@/components/PrivateRoute";
 
 const inventory = () => {
   return (
 
-    <SingInUser>
+    <PrivateRoute >
       <h1 className="text-3xl font-bold">Inventory Page</h1>
-    </SingInUser>
+    </PrivateRoute >
 
   );
 };

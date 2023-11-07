@@ -1,12 +1,12 @@
 import React from "react";
-import { SingInUser } from "@/components/SingInUser";
+import { PrivateRoute } from "@/components/PrivateRoute";
 
 const Home = () => {
   return (
 
-    <SingInUser>
+    <PrivateRoute>
       <h1>autenticated</h1>
-    </SingInUser>
+    </PrivateRoute>
 
   );
 };
