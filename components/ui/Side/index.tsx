@@ -9,7 +9,7 @@ const SideNavigationUserProfile = () => {
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
 
   return (
-    <div className="w-1/12 bg-slate-50">
+    <div className="w-1/5 bg-slate-50">
       {/*  <!-- Mobile trigger --> */}
       <MobileMenuIcon
         isSideNavOpen={isSideNavOpen}
@@ -27,7 +27,7 @@ const SideNavigationUserProfile = () => {
       </aside>
 
       <button
-        className={`fixed top-0 bottom-0 left-0 right-0 z-30 bg-slate-800 transition-colors sm:hidden ${isSideNavOpen ? "block" : "hidden"
+        className={`fixed top-0 bottom-0 left-0 right-0 z-30 bg-slate-200/20 transition-colors sm:hidden ${isSideNavOpen ? "block" : "hidden"
           }`}
         onClick={() => setIsSideNavOpen((prev) => !prev)}
       ></button>
