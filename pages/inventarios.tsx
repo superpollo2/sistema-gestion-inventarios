@@ -7,43 +7,25 @@ const inventory = () => {
     <PrivateRoute >
        <div>
        <h1 className="text-3xl font-bold">Inventory Page</h1>
-      <Table data={[
-        {
-          "id": 123,
-          "fecha": "05/11/2023",
-          "entrada": 50,
-          "salida": 0,
-          "responsable" : "pepe el grillo"
-        },
-        {
-          "id": 123,
-          "fecha": "05/11/2023",
-          "entrada": 50,
-          "salida": 0,
-          "responsable" : "pepe el grillo"
-        }
-      ]}  columns={[
-        {
-          accessor: "id",
-          header: "Identificador"
-        },
-        {
-          accessor: "fecha",
-          header: "Fecha"
-        },
-        {
-          accessor: "entrada",
-          header: "Entrada"
-        },
-        {
-          accessor: "salida",
-          header: "Salida"
-        },
-        {
-          accessor: "responsable",
-          header: "Responsable"
-        }]}/>
-        </div>
+      <Table rows={[
+      {
+        "id": 123,
+        "name": "Juan Pepe"
+      },
+      {
+        "id": 456,
+        "name": "Don Rodrigo"
+      }
+    ]}  columns={[
+      {
+        accessor: "id",
+        header: "Document"
+      },
+      {
+        accessor: "name",
+        header: "Full Name"
+      }]}/>
+    </div>
 
   
       
