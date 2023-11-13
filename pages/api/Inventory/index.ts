@@ -32,7 +32,6 @@ const inventoriesApi = async (
     }
 
 
-
 };
 
 export default inventoriesApi;
