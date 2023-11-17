@@ -1,55 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { PrivateRoute  } from "@/components/PrivateRoute";
+import React from "react";
+import { PrivateRoute } from "@/components/PrivateRoute";
 import { ProtectedComponent } from "@/components/ProtectedComponent";
-import Table from "@/components/Table";
+import { Table } from "@/components/ui/Table";
+import { getHeadersUsers } from "@/services/getheaders";
+import { useGetUsers } from '@/hooks/useGetUsers';
+import { Load } from "@/components/general/Load";
+
 
 const users = () => {
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    fetch('http://localhost:3000/api/users')
-      .then((res) => res.json())
-      .then((data) => {
-        setUsers(data.users);
-      });
-  }, [])
+
+  const { users, isLoading, error } = useGetUsers();
+
+  const getHeaders = getHeadersUsers();
+
+
   return (
     <PrivateRoute >
       <ProtectedComponent roleName="ADMIN">
         <div>
-      <h1 className="text-3xl font-bold">Users Page</h1>
-      <Table data={users}  columns={[
-          {
-            accessor: "id",
-            header: "Identificador",
-            hidden: false
-          },
-          {
-            accessor: "name",
-            header: "Nombre",
-            hidden: false
-          },
-          {
-            accessor: "email",
-            header: "Email",
-            hidden: false
-          },
-          {
-            accessor: "emailVerified",
-            header: "Verificado",
-            hidden: true
-          },
-          {
-            accessor: "image",
-            header: "Imagen",
-            hidden: true
-          },
-          {
-            accessor: "roleId",
-            header: "Rol",
-            hidden: false
+          <h1 className="text-3xl font-bold">Users Page</h1>
+          {isLoading ? (
+            <Load />
+          ) : (
+                <Table columns={getHeaders} data={users} /> 
+          )
           }
-          ]
-        }/>
         </div>
       </ProtectedComponent>
     </PrivateRoute >

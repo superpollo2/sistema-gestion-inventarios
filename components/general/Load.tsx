@@ -3,7 +3,7 @@ const Load = () => {
     <div className="w-full h-screen flex flex-col items-center justify-center">
       <div className="flex items-center">
         <svg
-          className="animate-spin h-8 w-8 mr-3 text-zinc-800 text-xl"
+          className="animate-spin h-6 w-6 mr-3 text-zinc-800 text-xl"
           fill="none"
           viewBox="0 0 24 24"
         >

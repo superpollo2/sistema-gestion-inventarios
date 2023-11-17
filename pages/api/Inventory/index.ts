@@ -16,15 +16,17 @@ const inventoriesApi = async (
         await checkPrivateApi(req, res);
 
         if (req.method === 'GET') {
-            const { material } = req.query;
+            const { materialId } = req.query;
 
+            console.log('paremetro',materialId)
             const inventories = await prisma.inventoryMovement.findMany({
                 where: {
-                    materialId: material as string,
+                    materialId: materialId as string,
                 },
             });
 
             return res.status(200).json({ inventories });
+            
         }
         return res.status(405).json({ message: 'Method not allowed' });
     } catch {
@@ -33,5 +35,4 @@ const inventoriesApi = async (
 
 
 };
-
 export default inventoriesApi;

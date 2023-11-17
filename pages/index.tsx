@@ -1,6 +1,6 @@
 import React from "react";
 import { PrivateRoute } from "@/components/PrivateRoute";
-import Table from "@/components/Table/index";
+
 
 const Home = () => { 
   return (

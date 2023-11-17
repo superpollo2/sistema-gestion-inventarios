@@ -1,69 +1,59 @@
 import React, { useEffect, useState } from "react";
-import { PrivateRoute  } from "@/components/PrivateRoute";
-import Table from "@/components/Table/index";
+import { PrivateRoute } from "@/components/PrivateRoute";
+import { useGetMaterials } from "@/hooks/useGetMaterials";
+import { useGetInventories } from "@/hooks/useGetInventories";
+import axios from "axios";
+import { getHeadersInventory } from "@/services/getheaders";
+import { Table } from "@/components/ui/Table";
+import { Load } from "@/components/general/Load";
+
 
 const inventory = () => {
+
+
+
+  const getHeaders = getHeadersInventory();
+  const { materials, isLoading } = useGetMaterials();
   const [material, setMaterial] = useState("");
-  const [materials, setMaterials] = useState([]);
-  const [inventory, setInventory] = useState([]);
-  
-  useEffect(() => {
-    fetch('http://localhost:3000/api/materials')
-      .then((res) => res.json())
-      .then((data) => {
-        setMaterials(data.materials);
-        setMaterial(data.materials[0].id);
-    })
-  }, []);
-  
-  useEffect(() => {
-    fetch(`http://localhost:3000/api/Inventory?material=${material}`)
-    .then((res) => res.json())
-    .then((data) => {
-      setInventory(data.inventories);
-    });
-  }, [material]);
-  
+
+  const { inventories } = useGetInventories(material);
+
+  console.log('soy algo', inventories)
+
+
+  console.log('Fetching inventory', inventory)
+  console.log('material fuera del fect', material)
   return (
     <PrivateRoute >
-       <div>
-       <h1 className="text-3xl font-bold">Inventory Page</h1>
-       <select
-        value={material}
-        onChange={(e) => {
-          setMaterial(e.target.value);
-        }}
-      >
-        {materials.map((mat) => 
-        <option>{mat.id}</option>
-        )}
-      </select>
+      <div>
+        <h1 className="text-3xl font-bold">Inventory Page</h1>
+        <select
+          value={material}
+          onChange={(e) => {
+            setMaterial(e.target.value);
+          }}
+        >
 
-      <Table data={inventory}  columns={[
-        {
-          accessor: "id",
-          header: "Identificador"
-        },
-        {
-          accessor: "movementType",
-          header: "Tipo de movimiento"
-        },
-        {
-          accessor: "quantity",
-          header: "Cantidad"
-        },
-        {
-          accessor: "materialId",
-          header: "Material"
-        },
-        {
-          accessor: "userId",
-          header: "Usuario"
-        }]}/>
+          {materials.map((mat) =>
+            <option key={mat['id']} value={mat['id']}>{mat['name']}</option>
+          )}
+        </select>
+        {material === '' ? (
+          <span>seleccione un material</span>
+        ) : (
+
+          isLoading ? (
+            <Load />
+          ) : (
+            <Table columns={getHeaders} data={inventories} />
+          )
+
+        )
+        }
       </div>
 
-  
-      
+
+
     </PrivateRoute >
 
   );
