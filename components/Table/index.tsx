@@ -6,7 +6,7 @@ const Table = ({ data, columns}) => {
       <table>
         <thead>
         <tr style={{border: "1px solid rgb(0, 0, 0)"}}>
-          {columns.map((column) => (
+          {columns.filter(x => !x.hidden).map((column) => (
             <td style={{border: "1px solid rgb(0, 0, 0)", backgroundColor: "#9b9b9b", width: "300px"}}>
                 { column.header }
             </td>
@@ -17,7 +17,7 @@ const Table = ({ data, columns}) => {
           {data.map((row) => {
             return (
               <tr style={{border: "1px solid rgb(0, 0, 0)"}}>
-                {columns.map((column) => (
+                {columns.filter(x => !x.hidden).map((column) => (
                   <td style={{border: "1px solid rgb(0, 0, 0)"}}>
                     {
                         row[column.accessor]
