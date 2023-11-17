@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { ExampleComponent } from '.';
+import React from 'react';
 
 describe('ExampleComponentTests', () => {
   const mockProps = {

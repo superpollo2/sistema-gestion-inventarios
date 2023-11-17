@@ -1,5 +1,6 @@
 import { HiOutlineArrowCircleRight } from "react-icons/hi";
 import { signOut } from "next-auth/react";
+import React from "react";
 
 const SideFooter = () => {
   return (

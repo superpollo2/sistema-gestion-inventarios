@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { ExampleComponent2 } from '.';
+import React from 'react';
 
 describe('ExampleComponentTests', () => {
   beforeEach(() => {

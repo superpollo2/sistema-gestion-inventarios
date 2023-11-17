@@ -6,6 +6,8 @@ import axios from "axios";
 import { getHeadersInventory } from "@/services/getheaders";
 import { Table } from "@/components/ui/Table";
 import { Load } from "@/components/general/Load";
+import { GraphInventory } from "@/components/ui/GraphInventory";
+
 
 
 const inventory = () => {
@@ -52,8 +54,9 @@ const inventory = () => {
         }
       </div>
 
-
-
+      <div>
+        <GraphInventory/>
+      </div>
     </PrivateRoute >
 
   );

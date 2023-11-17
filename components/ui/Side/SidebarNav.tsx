@@ -1,6 +1,7 @@
 import { LinkItem } from "./LinkItem";
 import { HiOutlineChat, HiOutlineUsers, HiOutlineViewGrid } from "react-icons/hi";
 import { useSession } from "next-auth/react";
+import React from "react";
 
 const SidebarNavigation = () => {
     const { data } = useSession();
