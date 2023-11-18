@@ -3,20 +3,17 @@ import { TableInventory } from "@/components/ui/Table/TableInventory";
 import { PrivateRoute } from "@/components/PrivateRoute";
 import { useGetMaterials } from "@/hooks/useGetMaterials";
 import { useGetInventories } from "@/hooks/useGetInventories";
-import { getHeadersInventory } from "@/services/getheaders";
 import { Load } from "@/components/general/Load";
-import { useGetUsers } from "@/hooks/useGetUsers";
+
 
 
 const inventory = () => {
 
 
 
-  const getHeaders = getHeadersInventory();
+
   const { materials, isLoading } = useGetMaterials();
   const [material, setMaterial] = useState("");
-  const { users } = useGetUsers();
-
   const { inventories } = useGetInventories(material);
 
 
@@ -44,7 +41,7 @@ const inventory = () => {
           isLoading ? (
             <Load />
           ) : (
-            <TableInventory columns={getHeaders} inventary={inventories} />
+            <TableInventory inventaries={inventories} />
           )
 
         )
