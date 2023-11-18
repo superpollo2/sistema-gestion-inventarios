@@ -1,15 +1,17 @@
+import { UserKeys } from "@/types";
+
 export const getHeadersUsers = () => (
     [
         {
-            dataAttribute: 'id',
+            userAttribute: 'id',
             header: 'Identificador'
         },
         {
-            dataAttribute: 'email',
+            userAttribute: 'email',
             header: 'Correo '
         },
         {
-            dataAttribute: 'roleId',
+            userAttribute: 'roleId',
             header: 'Rol'
         }
     ]
@@ -18,45 +20,45 @@ export const getHeadersUsers = () => (
 export const getHeadersMaterials = () => (
     [
         {
-            dataAttribute: 'id',
+            materialAttribute: 'id',
             header: 'Identificador'
         },
         {
-            dataAttribute: 'createdAt',
+            materialAttribute: 'createdAt',
             header: 'Fecha de Creación'
         },
         {
-            dataAttribute: 'name',
+            materialAttribute: 'name',
             header: 'Nombre '
         },
         {
-            dataAttribute: 'quantity',
+            materialAttribute: 'quantity',
             header: 'Saldo'
         },
         {
-            dataAttribute: 'userId',
+            materialAttribute: 'userId',
             header: 'Creado por '
         }
 
     ]
 );
 
-export const getHeadersInventory = () => (
+export const getHeadersInventory = ()  => (
     [
         {
-            dataAttribute: 'id',
+            inventaryAttribute: 'id',
             header: 'Identificador'
         },
         {
-            dataAttribute: 'quantity',
+            inventaryAttribute: 'entrada',
             header: 'Entrada '
         },
         {
-            dataAttribute: 'movementType',
-            header: 'Entrada '
+            inventaryAttribute: 'salida',
+            header: 'Salida '
         },
         {
-            dataAttribute: 'userId',
+            inventaryAttribute: 'userId',
             header: 'Responsable'
         }
 

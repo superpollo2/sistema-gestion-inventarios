@@ -17,8 +17,6 @@ const inventoriesApi = async (
 
         if (req.method === 'GET') {
             const { materialId } = req.query;
-
-            console.log('paremetro',materialId)
             const inventories = await prisma.inventoryMovement.findMany({
                 where: {
                     materialId: materialId as string,

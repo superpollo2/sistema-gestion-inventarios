@@ -1,16 +1,16 @@
 import React from "react";
 import { PrivateRoute } from "@/components/PrivateRoute";
 import { ProtectedComponent } from "@/components/ProtectedComponent";
-import { Table } from "@/components/ui/Table";
+import { TableUsers } from "@/components/ui/Table/TableUsers";
 import { getHeadersUsers } from "@/services/getheaders";
 import { useGetUsers } from '@/hooks/useGetUsers';
 import { Load } from "@/components/general/Load";
+import { useGetRoles } from "@/hooks/useGetRoles";
 
 
 const users = () => {
 
-  const { users, isLoading, error } = useGetUsers();
-
+  const { users, isLoading } = useGetUsers();
   const getHeaders = getHeadersUsers();
 
 
@@ -22,7 +22,7 @@ const users = () => {
           {isLoading ? (
             <Load />
           ) : (
-                <Table columns={getHeaders} data={users} /> 
+            <TableUsers columns={getHeaders} user={users}/>
           )
           }
         </div>

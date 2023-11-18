@@ -1,12 +1,13 @@
-import { Material, InventoryMovement, Role, User } from '@prisma/client';
+import { Material, InventoryMovement, Role, User, Enum_RoleName } from '@prisma/client';
 
 
 export interface UsersQuery {
-  users: User[];
+  users: User[]
 }
 
+
 export interface RolesQuery {
-  roles: Role[];
+  roles: Role[]
 }
 
 export interface MaterialQuery {
@@ -18,3 +19,11 @@ export interface InventoryMovementQuery {
 }
 
 
+export interface UserKeys {
+  id: keyof User;
+  name: keyof User;
+  email: keyof User;
+  emailVerified: keyof User;
+  image: keyof User;
+  roleId: keyof User;
+}

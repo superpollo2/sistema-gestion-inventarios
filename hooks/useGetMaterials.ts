@@ -2,6 +2,7 @@
 import useSWR from 'swr';
 import { MaterialQuery } from '@/types';
 import { API_ROUTES, fetcher } from '@/services/apiConfig';
+import { Material } from '@prisma/client';
 
 const useGetMaterials = () => {
     const {data, isLoading, error} = useSWR<MaterialQuery>(
@@ -12,7 +13,7 @@ const useGetMaterials = () => {
     console.log(data?.materials)
 
     return {
-      materials: data?.materials ?? [] as MaterialQuery[],
+      materials: data?.materials ?? [] as Material[],
       isLoading,
       error
     }

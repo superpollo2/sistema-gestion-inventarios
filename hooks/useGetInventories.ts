@@ -2,6 +2,7 @@
 import useSWR from 'swr';
 import { InventoryMovementQuery } from '@/types';
 import { API_ROUTES, fetcher } from '@/services/apiConfig';
+import { InventoryMovement } from '@prisma/client';
 
 const useGetInventories = (material: string) => {
     const {data, isLoading, error} = useSWR<InventoryMovementQuery>(
@@ -11,7 +12,7 @@ const useGetInventories = (material: string) => {
     
 
     return {
-      inventories: data?.inventories ?? [] as InventoryMovementQuery[],
+      inventories: data?.inventories ?? [] as InventoryMovement[],
       isLoading,
       error
     }
