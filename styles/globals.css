@@ -4,9 +4,25 @@
 
 
 th {
- 
-    @apply border border-slate-600 p-2;
+    @apply border  p-2;
 }
 td{
-    @apply border  border-slate-600 py-1 px-4;
+    @apply border-none  py-1 pl-4 px-6 text-slate-600 text-start;
+}
+
+thead{
+    @apply bg-[#03071E] text-[#E85D04]
+    
+}
+
+td:nth-child(2n+1){
+ @apply bg-slate-200;
+}
+
+.titulo {
+  @apply text-3xl font-bold text-[#E85D04]
+}
+
+.debug {
+    border: 1px solid purple
 }

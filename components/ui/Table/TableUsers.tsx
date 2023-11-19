@@ -9,12 +9,12 @@ interface TableProps {
 const TableUsers = ({ users }: TableProps) => {
   const { roles } = useGetRoles();
   return (
-    <table className="bg-white  border-collapse rounded-xl border text-center border-slate-500 table-auto ">
-      <thead className="bg-zinc-100 ">
+    <table className=" text-center border-separate border-spacing-1 table-auto">
+      <thead className=" ">
         <tr>
-          <th >identificador</th>
-          <th >Email</th>
-          <th >Role</th>
+          <th >Identificador</th>
+          <th >E-mail</th>
+          <th >Rol</th>
         </tr>
       </thead>
       <tbody>
