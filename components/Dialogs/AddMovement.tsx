@@ -27,7 +27,6 @@ const AddMovement = ({ open, setDialogOpen, material }: deliverablesDialogProps)
                 <DialogContent>
                     <SelecMenu />
                 </DialogContent>
-
                 <DialogContent className="flex flex-col items-center font-bold">
                     <h1>Cantidad del material</h1>
                     <TextField value={numberValue} onChange={handleNumberChange} />
