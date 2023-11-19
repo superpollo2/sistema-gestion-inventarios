@@ -12,9 +12,9 @@ const TableUsers = ({ users }: TableProps) => {
     <table className="bg-white  border-collapse rounded-xl border text-center border-slate-500 table-auto ">
       <thead className="bg-zinc-100 ">
         <tr>
-          <th>identificador</th>
-          <th>Email</th>
-          <th>Role</th>
+          <th >identificador</th>
+          <th >Email</th>
+          <th >Role</th>
         </tr>
       </thead>
       <tbody>

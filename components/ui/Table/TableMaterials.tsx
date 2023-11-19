@@ -23,7 +23,7 @@ const TableMaterials = ({ materials }: TableProps) => {
         {materials.map((material) => (
           <tr key={material.id}>
             <td>{material.id}</td>
-            <td>{material.createdAt.toISOString()}</td>
+            <td>{material.createdAt.toString()}</td>
             <td>{material.name}</td>
             <td>{material.quantity}</td>
             <td>{users?.find((r) => r.id === material.userId)?.name ?? ""}</td>
