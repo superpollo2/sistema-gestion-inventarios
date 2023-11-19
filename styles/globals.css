@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+th {
+ 
+    @apply border border-slate-600 p-2;
+}
+td{
+    @apply border  border-slate-600 py-1 px-4;
+}

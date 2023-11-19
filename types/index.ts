@@ -18,12 +18,3 @@ export interface InventoryMovementQuery {
   inventories: InventoryMovement[];
 }
 
-
-export interface UserKeys {
-  id: keyof User;
-  name: keyof User;
-  email: keyof User;
-  emailVerified: keyof User;
-  image: keyof User;
-  roleId: keyof User;
-}

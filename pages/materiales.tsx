@@ -2,14 +2,13 @@ import React from "react";
 import { PrivateRoute } from "@/components/PrivateRoute";
 import {useGetMaterials} from "@/hooks/useGetMaterials";
 import { TableMaterials } from "@/components/ui/Table/TableMaterials";
-import { getHeadersMaterials } from "@/services/getheaders";
 import { Load } from "@/components/general/Load";
 
 const materials = () => {
 
   
   const {materials, isLoading} = useGetMaterials();
-  const getHeaders = getHeadersMaterials();
+
 
   return (
 
@@ -19,7 +18,7 @@ const materials = () => {
         {isLoading ? (
           <Load />
         ) : (
-            <TableMaterials columns={getHeaders} material={materials}/>
+            <TableMaterials materials={materials}/>
         )
         }
       </div>
