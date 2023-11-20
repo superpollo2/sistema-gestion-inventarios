@@ -63,7 +63,7 @@ const inventory = () => {
         
 
         <GraphInventory />
-        <AddMovement material={nameMaterial} open={dialogOpen} setDialogOpen={setDialogOpen} />
+        <AddMovement material={nameMaterial} open={dialogOpen} setDialogOpen={setDialogOpen} materialID={material} />
       </div>
     </PrivateRoute >
 
