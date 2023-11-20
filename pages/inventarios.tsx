@@ -28,13 +28,15 @@ const inventory = () => {
   return (
     <PrivateRoute >
       <div className="flex flex-col gap 2 w-4/5">
-        <h1 className="text-3xl font-bold">Inventory Page</h1>
-        <div className="flex flex-row gap-4">
+        <h1 className="titulo my-4">Inventory Page</h1>
+        <div className="flex flex-row  gap-4">
+          
           <select
             value={material}
             onChange={(e) => {
               setMaterial(e.target.value);
             }}
+            className=" border-none bg-[#E85D04] px-2 text-slate-200 rounded-md"
           >
             {materials.map((mat) =>
               <option key={mat.id} value={mat.id}>{mat.name}</option>
@@ -42,10 +44,11 @@ const inventory = () => {
           </select>
 
           <Button text="Agregar un Movimiento" type={"primary"} handleClick={handleAddMovementDialogClick} />
+
         </div>
 
         {material === '' ? (
-          <span>seleccione un material</span>
+          <span className=" my-3 text-slate-600 text-lg">Seleccione un material</span>
         ) : (
 
           isLoading ? (

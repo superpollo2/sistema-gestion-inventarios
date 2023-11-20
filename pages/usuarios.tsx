@@ -15,7 +15,11 @@ const users = () => {
     <PrivateRoute >
       <ProtectedComponent roleName="ADMIN">
         <div>
-          <h1 className="text-3xl font-bold">Users Page</h1>
+          <div className="p-8 pl-0">
+          <h1 className="titulo pl-1 "> Usuarios registrados</h1>
+          </div>
+          
+
           {isLoading ? (
             <Load />
           ) : (

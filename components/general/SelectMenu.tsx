@@ -13,9 +13,10 @@ const SelecMenu = () => {
   };
 
   return (
-    <Box sx={{ minWidth: 200}}>
-      <FormControl fullWidth>
-        <InputLabel id="material-select">Tipo de Movimiento</InputLabel>
+    <Box sx={{ minWidth: 200}}  className='bg-slate-100 rounded-md'>
+      <FormControl fullWidth >
+        
+        <InputLabel id="material-select" className='font-semibold text-slate-600'>Tipo de Movimiento</InputLabel>
         <Select
           labelId="material-select"
           id="material"
@@ -26,6 +27,7 @@ const SelecMenu = () => {
           <MenuItem value={1}>Entrada</MenuItem>
           <MenuItem value={2}>Salida</MenuItem>
         </Select>
+
       </FormControl>
     </Box>
   );

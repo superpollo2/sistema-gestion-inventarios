@@ -14,7 +14,10 @@ const materials = () => {
 
     <PrivateRoute >
       <div>
-        <h1 className="text-3xl font-bold">Materials Page</h1>
+        <div className="p-8 pl-0">
+        <h1 className="titulo pl-1">Materiales</h1>
+        </div>
+        
         {isLoading ? (
           <Load />
         ) : (

@@ -20,19 +20,25 @@ const AddMovement = ({ open, setDialogOpen, material }: deliverablesDialogProps)
 
     return (
         <Dialog open={open}>
-            <div className='flex flex-col px-4 py-2 items-center'>
+            <div className='flex flex-col px-4 py-2 items-center bg-[#03071E] '>
+
                 <DialogTitle className='font-bold'>
                     {material}
                 </DialogTitle>
+                
                 <DialogContent>
                     <SelecMenu />
                 </DialogContent>
-                <DialogContent className="flex flex-col items-center font-bold">
+
+                <DialogContent className="  flex flex-col items-center">
+                    <div className="text-slate-200 pb-3 font-light text-md">
                     <h1>Cantidad del material</h1>
+                    </div>
+                    
                     <TextField value={numberValue} onChange={handleNumberChange} />
                 </DialogContent>
 
-                <div>
+                <div className="flex flex-row gap-4 mb-5">
                     <Button text="Guardar" type="secondary" handleClick={
                         () => { setDialogOpen(false) }
                     } />

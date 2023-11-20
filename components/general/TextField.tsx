@@ -22,15 +22,15 @@ const TextField = ({ value, onChange }: TextFieldProps) => {
   };
 
   return (
-    <div className="flex items-center">
-      <button className='font-bold text-4xl' onClick={handleDecrement}>-</button>
+    <div className="flex items-center ">
+      <button className='font-bold text-slate-200 text-4xl pr-2' onClick={handleDecrement}>-</button>
       <input
         type="text"
         value={value}
         onChange={handleChange}
-        className="border border-gray-400 p-2 text-center"
+        className="border border-gray-400 p-2 font-semibold text-slate-600 text-center bg-slate-100 rounded-md"
       />
-      <button className='font-bold text-3xl' onClick={handleIncrement}>+</button>
+      <button className='font-bold text-3xl pl-2 text-slate-200 ' onClick={handleIncrement}>+</button>
     </div>
   );
 };

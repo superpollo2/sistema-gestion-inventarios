@@ -1,5 +1,8 @@
 import { LinkItem } from "./LinkItem";
 import { HiOutlineChat, HiOutlineUsers, HiOutlineViewGrid } from "react-icons/hi";
+import { PiUsersFill } from "react-icons/pi";
+import { MdInventory2 } from "react-icons/md";
+import { BsFillBoxFill } from "react-icons/bs";
 import { useSession } from "next-auth/react";
 
 const SidebarNavigation = () => {
@@ -7,23 +10,25 @@ const SidebarNavigation = () => {
     return (
         <nav
             aria-label="side navigation"
-            className="flex-1  divide-y divide-slate-100 overflow-auto"
+            className="flex-1  divide-y divide-slate-100 overflow-auto pt-5 bg-[#03071E]"
         >
-            <div>
-                <ul className=" flex flex-col py-5">
+            <div className="">
+                <ul className=" flex flex-col py-5 gap-6 items-center">
                     {data?.user.role?.name === "ADMIN" && (
                         <>
                             <LinkItem link="/usuarios" text="Usuarios" >
-                                <HiOutlineUsers />
+                                <PiUsersFill />
                             </LinkItem>
                         </>
                     )}
 
                     <LinkItem link="/inventarios" text="Inventarios">
-                        <HiOutlineViewGrid />
+                        <MdInventory2 />
                     </LinkItem>
+
+
                     <LinkItem link="/materiales" text="Materiales">
-                        <HiOutlineChat />
+                        <BsFillBoxFill />
                     </LinkItem>
 
                 </ul>

@@ -1,21 +1,33 @@
 import { useGetRoles } from "@/hooks/useGetRoles";
-import React from "react";
+import React, { useState } from "react";
 import { User } from "@prisma/client";
 import { HiOutlinePencil } from "react-icons/hi";
+import { ChangeRoleUserDialog } from "@/components/Dialogs/ChangeRoleUserDialog";
+import { ToastContainer } from "react-toastify";
 interface TableProps {
     users: User[];
 }
 
 const TableUsers = ({ users }: TableProps) => {
+
+
+    const [editRolOpen, setEditRolOpen] = useState(false);
     const { roles } = useGetRoles();
+    const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
+    const handleOpenEditRol = (user: User) => {
+        setSelectedUser(user);
+        setEditRolOpen((prev) => !prev);
+    };
+
     return (
-        <table className="bg-white  border-collapse rounded-xl border text-center border-slate-500 table-auto ">
-            <thead className="bg-zinc-100 ">
+        <table className="text-center border-separate border-spacing-1 table-auto">
+            <thead className="">
                 <tr>
-                    <th >identificador</th>
-                    <th >Email</th>
-                    <th >Role</th>
-                    <th >Actions</th>
+                    <th>Identificador</th>
+                    <th>E-mail</th>
+                    <th>Rol</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,12 +36,30 @@ const TableUsers = ({ users }: TableProps) => {
                         <td>{user.id}</td>
                         <td>{user.email}</td>
                         <td>{roles?.find((r) => r.id === user.roleId)?.name ?? ""}</td>
-                        <td><HiOutlinePencil className="text-sky-600"/></td>
+                        <td>
+                            <HiOutlinePencil
+                                className="text-sky-600"
+                                onClick={() => handleOpenEditRol(user)}
+                            />
+                        </td>
                     </tr>
                 ))}
             </tbody>
+
+            {selectedUser && (
+
+
+                <ChangeRoleUserDialog
+                    open={editRolOpen}
+                    setDialogOpen={setEditRolOpen}
+                    user={selectedUser}
+                />
+
+
+            )}
         </table>
     );
 };
+
 
 export { TableUsers };
