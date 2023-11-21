@@ -19,6 +19,7 @@ const Layout = ({ children }: LayoutProps) => {
       
       <main className='flex'>
         <SideNavigationUserProfile />
+        
         {children}
       </main>
 

@@ -13,8 +13,8 @@ const SelecMenu = () => {
   };
 
   return (
-    <Box sx={{ minWidth: 200}}  className='bg-slate-100 rounded-md'>
-      <FormControl fullWidth >
+    <Box sx={{ minWidth: 200}}  className='bg-slate-100 rounded-md '>
+      <FormControl fullWidth className='flex items-center'>
         
         <InputLabel id="material-select" className='font-semibold text-slate-600'>Tipo de Movimiento</InputLabel>
         <Select

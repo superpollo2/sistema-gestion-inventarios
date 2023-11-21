@@ -14,6 +14,7 @@ const TableUsers = ({ users }: TableProps) => {
     const [editRolOpen, setEditRolOpen] = useState(false);
     const { roles } = useGetRoles();
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState(false);
 
     const handleOpenEditRol = (user: User) => {
         setSelectedUser(user);
@@ -36,9 +37,9 @@ const TableUsers = ({ users }: TableProps) => {
                         <td>{user.id}</td>
                         <td>{user.email}</td>
                         <td>{roles?.find((r) => r.id === user.roleId)?.name ?? ""}</td>
-                        <td>
+                        <td className="flex justify-center ">
                             <HiOutlinePencil
-                                className="text-sky-600"
+                                className="text-sky-600 hover:text-sky-400 active:text-sky-800 "
                                 onClick={() => handleOpenEditRol(user)}
                             />
                         </td>

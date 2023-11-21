@@ -1,18 +1,18 @@
 
 import useSWR from 'swr';
-import { InventoryMovementQuery } from '@/types';
+import {UsersQuery } from '@/types';
 import { API_ROUTES, fetcher } from '@/services/apiConfig';
-import { InventoryMovement } from '@prisma/client';
 
-const useGetInventories = (newRole: string) => {
-    const {data, isLoading, error} = useSWR<InventoryMovementQuery>(
-        API_ROUTES.material+material,
+
+const useGetInventories = (userId: string) => {
+    const {data, isLoading, error} = useSWR<UsersQuery>(
+      `${API_ROUTES.users}/${userId ?? ''}`,
         fetcher
     );
     
 
     return {
-      inventories: data?.inventories ?? [] as InventoryMovement[],
+      user: data?.users ,
       isLoading,
       error
     }
