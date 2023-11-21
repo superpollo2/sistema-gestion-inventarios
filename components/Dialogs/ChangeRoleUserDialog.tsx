@@ -23,7 +23,7 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
     const [loading, setLoading] = useState(false);
 
 
-
+    console.log('userid', user.id)
 
 
     const [formData, setFormData] = useState<{ roleId: string | null }>({
@@ -78,8 +78,22 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
             // actualizacion de la tabla de usuarios
             await mutate(API_ROUTES.users);
             toast.success('Usuario actualizado correctamente');
-        } catch (error) {
-            console.log(error);
+            
+        } catch (error: any) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.error("Response data:", error.response.data);
+                console.error("Response status:", error.response.status);
+                console.error("Response headers:", error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.error("No response received. Request details:", error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.error("Error details:", error.message);
+            }
+            setFormData({ roleId: roleUser });
             toast.error('Error actualizando el usuario');
         } finally {
             setLoading(false);
