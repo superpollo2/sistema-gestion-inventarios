@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material"
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { User } from "prisma/prisma-client";
-import { SelectOne } from "@/components/general/Selected";
+import { SelectOne } from "@/components/general/SelecteMenuRole";
 import { mutate } from 'swr';
 import axios from "axios";
 import { API_ROUTES } from '@/services/apiConfig';
@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { PrimaryActionButton } from "@/components/ui/Buttons/PrimaryActionButton";
 import ConfirmationDialog from "./ConfirmationDialog";
 import { Spinner } from "@/components/general/Spinner";
+import { usePutUserRole } from "@/hooks/usePutUserRole";
 
 interface ChangeRoleUserProps {
     open: boolean
@@ -57,45 +58,41 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
 
     const handleConfirmChangeRole = async () => {
         setLoading(true);
-        console.log('formData', formData);
-        try {
-            // request para actualizar el usuario
-            await axios.request({
-                method: 'PUT',
-                url: `${API_ROUTES.users}/${user?.id ?? ''}`,
-                data: { roleId: formData.roleId },
-            });
+        const confirmation = toast.loading("Please wait...");
 
-            await mutate(API_ROUTES.users);
-            toast.success('Usuario actualizado correctamente');
-        } catch (error: any) {
-            setFormData({ roleId: roleUser });
-            console.error('error actualizando usuario', error)
-            toast.error('Error actualizando el usuario');
+        try {
+            const { success, errorMessage } = await usePutUserRole(user?.id, formData?.roleId ?? '');
+
+            if (success) {
+                // Actualización exitosa
+                await mutate(API_ROUTES.users);
+                toast.update(confirmation, { render: "Role modificado", type: "success", isLoading: false, autoClose: 1000 });
+            } else {
+                // Actualización fallida
+                setFormData({ roleId: roleUser });
+                console.error('Error actualizando usuario:', errorMessage);
+                toast.update(confirmation, { render: errorMessage, type: "error", isLoading: false, autoClose: 1000 });
+            }
         } finally {
             setLoading(false);
             setShowChangeConfirmation(false);
             setDialogOpen(false);
         }
-    };
+    }
 
-    return (
-        <>
-            <Dialog
-                open={open}
-                onClose={() => setDialogOpen(false)}>
-                <div className='flex flex-col px-4 py-2 items-center bg-[#03071E] '>
+        return (
+            <>
+                <Dialog
+                    open={open}
+                    onClose={() => setDialogOpen(false)}>
+                    <div className='flex flex-col px-4 py-2 items-center bg-[#03071E] '>
 
-                    <DialogTitle className='font-bold text-white'>
-                        <span>Editar role</span>
-                    </DialogTitle>
+                        <DialogTitle className='font-bold text-white'>
+                            <span>Editar role</span>
+                        </DialogTitle>
 
-                    <DialogContent className="  flex flex-col items-center space-y-5 ">
-                        {loading ? (
-                            <div>
-                                <Spinner color={'white'} />
-                            </div>
-                        ) : (
+                        <DialogContent className="  flex flex-col items-center space-y-5 ">
+
                             <>
                                 <div className="space-y-5 w-full">
 
@@ -109,9 +106,7 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
                                     </div>
                                 </div>
 
-
                                 <div className="flex flex-row gap-4 mb-5">
-
                                     <PrimaryActionButton
                                         text='Actualizar usuario'
                                         type='submit'
@@ -120,38 +115,37 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
                                         text='Cancelar'
                                         type='button'
                                         onClick={handleCancel} loading={false} />
-
-
                                 </div>
+
+
                             </>
-                        )};
-                    </DialogContent>
+                        </DialogContent>
 
 
-                </div>
-            </Dialog>
+                    </div>
+                </Dialog>
 
-            <ConfirmationDialog
-                open={showChangeConfirmation}
-                setOpen={setShowChangeConfirmation}
-                onConfirm={handleConfirmChangeRole}
-                onCancel={handleDesertCancel}
-                title="Confirmación de cambio de rol"
-                message="¿Estás seguro de cambiar el rol del usuario?"
-            />
+                <ConfirmationDialog
+                    open={showChangeConfirmation}
+                    setOpen={setShowChangeConfirmation}
+                    onConfirm={handleConfirmChangeRole}
+                    onCancel={handleDesertCancel}
+                    title="Confirmación de cambio de rol"
+                    message="¿Estás seguro de cambiar el rol del usuario?"
+                />
 
-            {/* Dialog de confirmación para cancelar */}
-            <ConfirmationDialog
-                open={showCancelConfirmation}
-                setOpen={setShowCancelConfirmation}
-                onConfirm={handleConfirmCancel}
-                onCancel={handleDesertCancel}
-                title="Confirmación de cancelación"
-                message="¿Estás seguro de cancelar? Se perderán los cambios no guardados."
-            />
-        </>
-    );
+                {/* Dialog de confirmación para cancelar */}
+                <ConfirmationDialog
+                    open={showCancelConfirmation}
+                    setOpen={setShowCancelConfirmation}
+                    onConfirm={handleConfirmCancel}
+                    onCancel={handleDesertCancel}
+                    title="Confirmación de cancelación"
+                    message="¿Estás seguro de cancelar? Se perderán los cambios no guardados."
+                />
+            </>
+        );
 
-};
+    };
 
-export { ChangeRoleUserDialog };
+    export { ChangeRoleUserDialog };

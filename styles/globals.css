@@ -10,7 +10,7 @@ td {
 }
 
 thead {
-  @apply bg-[#03071E] text-[#E85D04];
+  @apply bg-[#03071E] text-[#E85D04] ;
 }
 
 td:nth-child(2n + 1) {

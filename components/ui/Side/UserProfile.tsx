@@ -4,6 +4,7 @@ import Image from "next/image";
 
 const UserProfile = () => {
   const { data, status } = useSession();
+
   return (
     <div className="flex flex-col items-center gap-4  bg-[#03071E] pt-12 p-6">
       {status === "authenticated" && (
