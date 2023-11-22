@@ -8,8 +8,7 @@ import { API_ROUTES } from '@/services/apiConfig';
 import { toast } from "react-toastify";
 import { PrimaryActionButton } from "@/components/ui/Buttons/PrimaryActionButton";
 import ConfirmationDialog from "./ConfirmationDialog";
-import { Load } from "../general/Load";
-import { Spinner } from "../general/spiner";
+import { Spinner } from "@/components/general/Spinner";
 
 interface ChangeRoleUserProps {
     open: boolean
@@ -22,10 +21,6 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
     const roleUser = user.roleId;
     const [loading, setLoading] = useState(false);
 
-
-    console.log('userid', user.id)
-
-
     const [formData, setFormData] = useState<{ roleId: string | null }>({
         roleId: roleUser
     });
@@ -34,8 +29,6 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
         // Cada vez que prevRoleId cambia, actualiza el FormData
         setFormData((prevFormData) => ({ ...prevFormData, roleId: roleUser }));
     }, [roleUser]);
-
-
 
     const [showChangeConfirmation, setShowChangeConfirmation] = useState(false);
     const [showCancelConfirmation, setShowCancelConfirmation] = useState(false);
@@ -55,7 +48,6 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
         } else {
             toast.info('El usuario ya tiene asignado ese rol');
         }
-
     };
 
     const handleDesertCancel = () => {
@@ -63,10 +55,9 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
         // Puedes agregar lógica adicional si es necesario
     };
 
-
     const handleConfirmChangeRole = async () => {
         setLoading(true);
-
+        console.log('formData', formData);
         try {
             // request para actualizar el usuario
             await axios.request({
@@ -75,33 +66,17 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
                 data: { roleId: formData.roleId },
             });
 
-            // actualizacion de la tabla de usuarios
             await mutate(API_ROUTES.users);
             toast.success('Usuario actualizado correctamente');
-            
         } catch (error: any) {
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.error("Response data:", error.response.data);
-                console.error("Response status:", error.response.status);
-                console.error("Response headers:", error.response.headers);
-            } else if (error.request) {
-                // The request was made but no response was received
-                console.error("No response received. Request details:", error.request);
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                console.error("Error details:", error.message);
-            }
             setFormData({ roleId: roleUser });
+            console.error('error actualizando usuario', error)
             toast.error('Error actualizando el usuario');
         } finally {
             setLoading(false);
             setShowChangeConfirmation(false);
             setDialogOpen(false);
         }
-
-
     };
 
     return (
@@ -118,7 +93,7 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
                     <DialogContent className="  flex flex-col items-center space-y-5 ">
                         {loading ? (
                             <div>
-                                <Spinner color={'white'}/>
+                                <Spinner color={'white'} />
                             </div>
                         ) : (
                             <>

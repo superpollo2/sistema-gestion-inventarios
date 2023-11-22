@@ -4,6 +4,7 @@ import { User } from "@prisma/client";
 import { HiOutlinePencil } from "react-icons/hi";
 import { ChangeRoleUserDialog } from "@/components/Dialogs/ChangeRoleUserDialog";
 import { ToastContainer } from "react-toastify";
+import { RoleColor } from "@/components/general/RoleColor";
 interface TableProps {
     users: User[];
 }
@@ -26,8 +27,9 @@ const TableUsers = ({ users }: TableProps) => {
             <thead className="">
                 <tr>
                     <th>Identificador</th>
-                    <th>E-mail</th>
                     <th>Rol</th>
+                    <th>E-mail</th>
+                    
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -35,8 +37,8 @@ const TableUsers = ({ users }: TableProps) => {
                 {users.map((user) => (
                     <tr key={user.id}>
                         <td>{user.id}</td>
+                        <td className="flex justify-center"><RoleColor user={user}/></td>
                         <td>{user.email}</td>
-                        <td>{roles?.find((r) => r.id === user.roleId)?.name ?? ""}</td>
                         <td className="flex justify-center ">
                             <HiOutlinePencil
                                 className="text-sky-600 hover:text-sky-400 active:text-sky-800 "
@@ -48,8 +50,6 @@ const TableUsers = ({ users }: TableProps) => {
             </tbody>
 
             {selectedUser && (
-
-
                 <ChangeRoleUserDialog
                     open={editRolOpen}
                     setDialogOpen={setEditRolOpen}
