@@ -3,12 +3,10 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { User } from "prisma/prisma-client";
 import { SelectOne } from "@/components/general/SelecteMenuRole";
 import { mutate } from 'swr';
-import axios from "axios";
 import { API_ROUTES } from '@/services/apiConfig';
 import { toast } from "react-toastify";
 import { PrimaryActionButton } from "@/components/ui/Buttons/PrimaryActionButton";
 import ConfirmationDialog from "./ConfirmationDialog";
-import { Spinner } from "@/components/general/Spinner";
 import { usePutUserRole } from "@/hooks/usePutUserRole";
 
 interface ChangeRoleUserProps {
@@ -84,7 +82,7 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
             <>
                 <Dialog
                     open={open}
-                    onClose={() => setDialogOpen(false)}>
+                   >
                     <div className='flex flex-col px-4 py-2 items-center bg-[#03071E] '>
 
                         <DialogTitle className='font-bold text-white'>
@@ -101,7 +99,7 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
                                     </div>
 
                                     <div className="text-slate-200 pb-3 font-light text-md flex flex-col justify-center items-center">
-                                        <h1>Selecciona un role</h1>
+                                        <label>Selecciona un role</label>
                                         <SelectOne formData={formData ?? ''} setFormData={setFormData} />
                                     </div>
                                 </div>
