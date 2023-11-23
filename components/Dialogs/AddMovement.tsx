@@ -7,7 +7,6 @@ import { useInvetoryMovement } from "@/hooks/useInventoryMovenentPost"
 import { API_ROUTES } from "@/services/apiConfig";
 import { toast } from "react-toastify";
 import { mutate } from "swr";
-import inventory from "@/pages/inventarios";
 import { useSession } from "next-auth/react";
 
 interface deliverablesDialogProps {
@@ -24,7 +23,7 @@ const AddMovement = ({ open, setDialogOpen, material, materialId }: deliverables
     const [tipoMovement, setTipoMovement] = useState<string>('');
     const [loading, setLoading] = useState(false);
 
-
+    //Campturar el valor de la cantidad del movimiento, que se hace en el componente selecttMenu
     const handleNumberChange = (value: number) => {
         setNumberValue(value);
     };
@@ -34,6 +33,7 @@ const AddMovement = ({ open, setDialogOpen, material, materialId }: deliverables
         setTipoMovement(value);
     };
 
+    //Petición al back para realizar el POST con los datos del movimiento
     const handleConfirmAddMovement = async () => {
         setLoading(true);
         const confirmation = toast.loading("Please wait...");
@@ -54,8 +54,7 @@ const AddMovement = ({ open, setDialogOpen, material, materialId }: deliverables
                 toast.update(confirmation, { render: errorMessage, type: "error", isLoading: false, autoClose: 1000 });
             }
         } finally {
-            // setLoading(false);
-            //setShowChangeConfirmation(false);
+            setLoading(false);
             setDialogOpen(false);
         }
     }

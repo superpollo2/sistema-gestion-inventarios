@@ -30,11 +30,11 @@ const inventoriesApi = async (
         }
 
         if (req.method === 'POST') {
-
+            
+            //Construcción del body con los datos para la petición POST
             const { materialId, quantity, movementType, userId } = req.body;
             
-
-
+            //Validación de que ninguno de los campos esté vacio o faltante
             if (!materialId || !quantity || !movementType) {
                 return res.status(400).json({ message: 'Missing required fields' });
             }
@@ -55,8 +55,9 @@ const inventoriesApi = async (
                     }
                 },
             })
-            console.log("cosa")
+
             return res.status(201).json({})
+            
             //TODO: Restar y validar la cantidad en el objeto Material
         }
 
