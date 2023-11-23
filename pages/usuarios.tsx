@@ -10,20 +10,22 @@ import { Load } from "@/components/general/Load";
 const users = () => {
 
   const { users, isLoading } = useGetUsers();
-  
+
   return (
     <PrivateRoute >
       <ProtectedComponent roleName="ADMIN">
         <div>
-          <div className="p-8 pl-0">
-          <h1 className="titulo pl-1 "> Usuarios registrados</h1>
-          </div>
-          
+
 
           {isLoading ? (
             <Load />
           ) : (
-            <TableUsers  users={users}/>
+            <>
+              <div className="p-8 pl-0">
+                <h1 className="titulo pl-1 "> Usuarios registrados</h1>
+              </div>
+              <TableUsers users={users} />
+            </>
           )
           }
         </div>

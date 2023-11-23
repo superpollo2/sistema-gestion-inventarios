@@ -8,7 +8,7 @@ interface ResponseData {
     message?: string;
 }
 
-const userApi = async (
+const handler = async (
     req: NextApiRequest,
     res: NextApiResponse<ResponseData>
 ) => {
@@ -17,19 +17,18 @@ const userApi = async (
     try {
         if (req.method === 'PUT') {
             const userId = req.query.id as string;
-
+            const  roleId  = req.body.roleId as string;
+            
             const updatedUser = await prisma.user.update({
                 where: {
                     id: userId,
                 },
                 data: {
-                    roleId: req.body.roleId,
+                    roleId
                 },
             });
-
             return res.status(200).json({ user: updatedUser });
         }
-
         return res.status(405).json({ message: 'Method not allowed' });
     }catch{
         return res.status(500).json({ message: 'Internal server error' });
@@ -37,4 +36,4 @@ const userApi = async (
 
 };
 
-export default userApi;
+export default handler;

@@ -16,7 +16,7 @@ export const authOptions: NextAuthOptions = {
             return {
                 ...session,
                 user: {
-                    ...session.user,
+                    ...user,
                     role,
                 },
 

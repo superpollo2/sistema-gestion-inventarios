@@ -14,7 +14,7 @@ import { AddMovement } from "@/components/Dialogs/AddMovement";
 const inventory = () => {
 
   const { materials, isLoading } = useGetMaterials();
-  const [material, setMaterial] = useState("");
+  const [material, setMaterial] = useState("materias[0]");
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const { inventories } = useGetInventories(material);
   
