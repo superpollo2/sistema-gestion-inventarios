@@ -86,6 +86,7 @@ const CreateNewMaterialDialog = ({ open, setDialogOpen }: ChangeRoleUserProps) =
 
                 <form onSubmit={onSubmit}>
                     <div className="space-y-4 flex flex-col">
+
                         <div className="text-slate-200  font-light text-md w-full flex flex-col justify-center items-center space-y-2">
                             <label >Nombre del material</label>
                             <input

@@ -1,6 +1,6 @@
 interface ButtonProps {
     text: String
-    type: 'primary' | 'secondary'
+    type: string
     handleClick?: () => void
 }
 

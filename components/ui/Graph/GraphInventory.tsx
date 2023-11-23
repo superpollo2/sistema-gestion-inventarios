@@ -93,6 +93,7 @@ const GraphInventory = () => {
                             itemTextPosition="bottom"
                         />
                         <Export enabled={true} />
+
                         <Title text="Evolución de saldos diaría">
                             <Subtitle text="Total de saldos del Material" />
                         </Title>

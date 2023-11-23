@@ -100,11 +100,11 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
                     <PrimaryActionButton
                         text='Actualizar usuario'
                         type='submit'
-                        onClick={handleChangeRole} loading={false} />
+                        onClick={handleChangeRole} loading={loading} />
                     <PrimaryActionButton
                         text='Cancelar'
                         type='button'
-                        onClick={handleCancel} loading={false} />
+                        onClick={handleCancel} loading={loading} />
                 </div>
 
 

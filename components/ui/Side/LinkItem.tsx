@@ -15,7 +15,7 @@ const LinkItem = ({ link, text, children }: LinkItemProps) => {
                  focus:bg-[#FFBA08]
                   aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500 shadow-lg hover:shadow-none hover:scale-105 hover:bg-[#FFBA08] hover:text-[#22223b]"
             >
-                <div className="flex flex-row space-x-10">
+                <div className="flex flex-row space-x-5">
                     <div className="flex text-2xl text-slate-200">
                         {children}
                     </div>

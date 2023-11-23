@@ -2,23 +2,29 @@ import { signIn } from "next-auth/react";
 
 const SingIn = () => {
   return (
-    <div className="w-full h-screen bg-gradient-to-r to-blue-800 from-white flex items-center justify-center">
-      <div className="flex items-center justify-center flex-col bg-white rounded-lg p-8 shadow-md w-96 ">
-        <h1 className="text-3xl font-bold text-center mb-4">
-          Bienvenido al Sistema de Gestión de Inventarios
-        </h1>
-        <p className="text-center text-gray-600 mb-8">
-          Ingeniería Web MJ 2023-2
-        </p>
-        <button
-          className=""
-          onClick={() => {
-            signIn("auth0");
-          }}
-        >
-          Iniciar Sesion
-        </button>
-      </div>
+    <div className="h-screen w-full flex flex-row ">
+
+      <aside className=" w-8/12 bg-white flex flex-col  items-center justify-center">
+        <div className="pl-14">
+          <h1 className=" font-bold text-start text-6xl text-[#03071E] mb-4">
+            Bienvenido al Sistema de Gestión de Inventarios
+          </h1>
+          <p className="text-[#E85D04]  text-2xl"> Ingeniería Web MJ 2023-2 </p>
+          <button
+              className="px-5 py-3 rounded-md shadow-lg hover:scale-110 mt-5 hover:shadow-none bg-[#E85D04] text-white font-bold text-2xl hover:text-white hover:bg-[#03071E]"
+              onClick={() => {
+                signIn("auth0");
+              }}
+            >
+              Iniciar sesión
+            </button>
+
+        </div>
+      </aside>
+
+      <aside className="bg-[#E85D04] h-screen w-4/12"></aside>
+
+
     </div>
   );
 };
