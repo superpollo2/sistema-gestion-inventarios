@@ -30,7 +30,7 @@ const inventory = () => {
       <div className="flex flex-col gap 2 w-4/5">
         <h1 className="titulo my-4">Inventory Page</h1>
         <div className="flex flex-row  gap-4">
-          
+
           <select
             value={material}
             onChange={(e) => {
@@ -60,9 +60,10 @@ const inventory = () => {
         )
         }
 
-        
+
 
         <GraphInventory />
+
         <AddMovement material={nameMaterial} open={dialogOpen} setDialogOpen={setDialogOpen} />
       </div>
     </PrivateRoute >
