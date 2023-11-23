@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogTitle } from "@mui/material"
+import { Dialog, DialogContent, DialogTitle, MenuItem } from "@mui/material"
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { User } from "prisma/prisma-client";
 import { SelectOne } from "@/components/general/SelecteMenuRole";
@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 import { PrimaryActionButton } from "@/components/ui/Buttons/PrimaryActionButton";
 import ConfirmationDialog from "./ConfirmationDialog";
 import { usePutUserRole } from "@/hooks/usePutUserRole";
+import { DialogBase } from "./DialogBase";
+import { useGetRoles } from "@/hooks/useGetRoles";
 
 interface ChangeRoleUserProps {
     open: boolean
@@ -19,7 +21,7 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
 
     const roleUser = user.roleId;
     const [loading, setLoading] = useState(false);
-
+    const {roles} = useGetRoles();
     const [formData, setFormData] = useState<{ roleId: string | null }>({
         roleId: roleUser
     });
@@ -78,72 +80,59 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
         }
     }
 
-        return (
-            <>
-                <Dialog
-                    open={open}
-                   >
-                    <div className='flex flex-col px-4 py-2 items-center bg-[#03071E] '>
+    return (
+        <>
+            <DialogBase open={open} title="Editar role">
+                <>
+                    <div className="space-y-5 w-full">
 
-                        <DialogTitle className='font-bold text-white'>
-                            <span>Editar role</span>
-                        </DialogTitle>
+                        <div className="w-full">
+                            <input type="text" value={user.email ?? ''} className="p-3 w-full rounded-lg text-slate-200 text text-center " disabled />
+                        </div>
 
-                        <DialogContent className="  flex flex-col items-center space-y-5 ">
-
-                            <>
-                                <div className="space-y-5 w-full">
-
-                                    <div className="w-full">
-                                        <input type="text" value={user.email ?? ''} className="p-3 w-full rounded-lg text-slate-200 text text-center " disabled />
-                                    </div>
-
-                                    <div className="text-slate-200 pb-3 font-light text-md flex flex-col justify-center items-center">
-                                        <label>Selecciona un role</label>
-                                        <SelectOne formData={formData ?? ''} setFormData={setFormData} />
-                                    </div>
-                                </div>
-
-                                <div className="flex flex-row gap-4 mb-5">
-                                    <PrimaryActionButton
-                                        text='Actualizar usuario'
-                                        type='submit'
-                                        onClick={handleChangeRole} loading={false} />
-                                    <PrimaryActionButton
-                                        text='Cancelar'
-                                        type='button'
-                                        onClick={handleCancel} loading={false} />
-                                </div>
-
-
-                            </>
-                        </DialogContent>
-
-
+                        <div className="text-slate-200 pb-3 font-light text-md flex flex-col justify-center items-center">
+                            <label>Selecciona un role</label>
+                            <SelectOne formData={formData ?? ''} setFormData={setFormData}/>
                     </div>
-                </Dialog>
+                </div>
 
-                <ConfirmationDialog
-                    open={showChangeConfirmation}
-                    setOpen={setShowChangeConfirmation}
-                    onConfirm={handleConfirmChangeRole}
-                    onCancel={handleDesertCancel}
-                    title="Confirmación de cambio de rol"
-                    message="¿Estás seguro de cambiar el rol del usuario?"
-                />
+                <div className="flex flex-row gap-4 mb-5">
+                    <PrimaryActionButton
+                        text='Actualizar usuario'
+                        type='submit'
+                        onClick={handleChangeRole} loading={false} />
+                    <PrimaryActionButton
+                        text='Cancelar'
+                        type='button'
+                        onClick={handleCancel} loading={false} />
+                </div>
 
-                {/* Dialog de confirmación para cancelar */}
-                <ConfirmationDialog
-                    open={showCancelConfirmation}
-                    setOpen={setShowCancelConfirmation}
-                    onConfirm={handleConfirmCancel}
-                    onCancel={handleDesertCancel}
-                    title="Confirmación de cancelación"
-                    message="¿Estás seguro de cancelar? Se perderán los cambios no guardados."
-                />
+
             </>
-        );
+        </DialogBase >
 
-    };
 
-    export { ChangeRoleUserDialog };
+            <ConfirmationDialog
+                open={showChangeConfirmation}
+                setOpen={setShowChangeConfirmation}
+                onConfirm={handleConfirmChangeRole}
+                onCancel={handleDesertCancel}
+                title="Confirmación de cambio de rol"
+                message="¿Estás seguro de cambiar el rol del usuario?"
+            />
+
+    {/* Dialog de confirmación para cancelar */ }
+    <ConfirmationDialog
+        open={showCancelConfirmation}
+        setOpen={setShowCancelConfirmation}
+        onConfirm={handleConfirmCancel}
+        onCancel={handleDesertCancel}
+        title="Confirmación de cancelación"
+        message="¿Estás seguro de cancelar? Se perderán los cambios no guardados."
+    />
+        </>
+    );
+
+};
+
+export { ChangeRoleUserDialog };
