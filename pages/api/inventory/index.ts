@@ -31,9 +31,8 @@ const inventoriesApi = async (
 
         if (req.method === 'POST') {
 
-            const { data } = useSession();
-            const { materialId, quantity, movementType } = req.body;
-            const userId = data?.user.id
+            const { materialId, quantity, movementType, userId } = req.body;
+            
 
 
             if (!materialId || !quantity || !movementType) {
@@ -56,6 +55,8 @@ const inventoriesApi = async (
                     }
                 },
             })
+            console.log("cosa")
+            return res.status(201).json({})
             //TODO: Restar y validar la cantidad en el objeto Material
         }
 

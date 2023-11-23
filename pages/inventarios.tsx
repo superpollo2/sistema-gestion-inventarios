@@ -14,10 +14,11 @@ import { AddMovement } from "@/components/Dialogs/AddMovement";
 const inventory = () => {
 
   const { materials, isLoading } = useGetMaterials();
-  const [material, setMaterial] = useState("materias[0]");
+  const [material, setMaterial] = useState("");
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const { inventories } = useGetInventories(material);
   
+
   const nameMaterial = materials?.find((r) => r.id === material )?.name ?? "";
   
 
@@ -63,7 +64,7 @@ const inventory = () => {
         
 
         <GraphInventory />
-        <AddMovement material={nameMaterial} open={dialogOpen} setDialogOpen={setDialogOpen} />
+        <AddMovement material={nameMaterial} open={dialogOpen} setDialogOpen={setDialogOpen} materialId={material} />
       </div>
     </PrivateRoute >
 
