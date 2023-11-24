@@ -20,8 +20,8 @@ const inventory = () => {
   const [materialData, setMaterialData] = useState<Material | null>(null); // [materialId, setMaterialId
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const { inventories } = useGetInventories(materialId);
-  
-  const nameMaterial = materials?.find((r) => r.id === materialId )?.name ?? ""; 
+
+  const nameMaterial = materials?.find((r) => r.id === materialId)?.name ?? "";
   const handleMaterialChange = (e: { target: { value: any; }; }) => {
     const selectedId = e.target.value;
     const selectedMaterial = materials.find((mat) => mat.id === selectedId);
@@ -33,7 +33,7 @@ const inventory = () => {
   const handleAddMovementDialogClick = () => {
     setDialogOpen(true)
   }
-  
+
   return (
     <PrivateRoute >
       <div className="flex flex-col gap 2 w-4/5">
@@ -67,7 +67,7 @@ const inventory = () => {
         )
         }
         <GraphInventory />
-        <AddMovement material={nameMaterial} open={dialogOpen} setDialogOpen={setDialogOpen} materialId={material} />
+        <AddMovement material={nameMaterial} open={dialogOpen} setDialogOpen={setDialogOpen} materialId={materialId} />
 
       </div>
     </PrivateRoute >

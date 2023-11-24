@@ -78,7 +78,7 @@ const AddMovement = ({ open, setDialogOpen, material, materialId }: deliverables
                     <TextField value={numberValue} onChange={handleNumberChange} />
                 </div>
                 <div className="flex flex-row gap-4 mb-5 justify-center">
-                    <Button text="Guardar" type="secondary" handleClick={handleConfirmAddMovement} />
+                <Button text="Guardar" type="secondary" handleClick={handleConfirmAddMovement} />
 
                     <Button text="Cancelar" type="secondary" handleClick={
                         () => { setDialogOpen(false) }
