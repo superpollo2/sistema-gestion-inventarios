@@ -15,8 +15,6 @@ const users = () => {
     <PrivateRoute >
       <ProtectedComponent roleName="ADMIN">
         <div>
-
-
           {isLoading ? (
             <Load />
           ) : (
