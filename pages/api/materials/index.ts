@@ -21,22 +21,24 @@ const materialsApi = async (
         }
 
         if (req.method === 'POST') {
-            const { name, quantity, userId } = req.body;
+            const { data } = req.body;
 
-            // Validar que los campos requeridos estén presentes en el cuerpo de la solicitud
-            if (!name || !quantity || !userId) {
-                return res.status(400).json({ message: 'Missing required fields' });
-            }
-
+            // Crea un nuevo material y su movimiento en inventario
             const newMaterial = await prisma.material.create({
                 data: {
-                    name: name,
-                    quantity: parseInt(quantity),
-                    createdBy: {
-                        connect: {
-                            id: userId,
+                    name: data.name,
+                    quantity: data.quantity,
+                    userId: data.userId,
+                    movements: {
+                        create: {
+                            movementType: data.movementType,
+                            quantity: data.quantity,
+                            userId: data.userId,
                         },
                     },
+                },
+                include: {
+                    movements: true,
                 },
             });
 
