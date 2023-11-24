@@ -6,7 +6,9 @@ import { toast } from "react-toastify";
 import ConfirmationDialog from "./ConfirmationDialog";
 import { useForm } from "react-hook-form";
 import { DialogBase } from "./DialogBase";
-import axios from "axios";
+import { mutate } from 'swr';
+import { usePostMaterial } from "@/hooks/usePostMaterial";
+import { API_ROUTES } from "@/services/apiConfig";
 interface ChangeRoleUserProps {
     open: boolean
     setDialogOpen: Dispatch<SetStateAction<boolean>>
@@ -14,6 +16,12 @@ interface ChangeRoleUserProps {
 }
 
 const CreateNewMaterialDialog = ({ open, setDialogOpen }: ChangeRoleUserProps) => {
+
+
+    const [showChangeConfirmation, setShowChangeConfirmation] = useState(false);
+    const [showCancelConfirmation, setShowCancelConfirmation] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [numberValue, setNumberValue] = useState<number>(0);
 
     const { data } = useSession();
 
@@ -24,42 +32,46 @@ const CreateNewMaterialDialog = ({ open, setDialogOpen }: ChangeRoleUserProps) =
         formState: { errors },
     } = useForm();
 
-    const [showChangeConfirmation, setShowChangeConfirmation] = useState(false);
-    const [showCancelConfirmation, setShowCancelConfirmation] = useState(false);
-
-    const [numberValue, setNumberValue] = useState<number>(0);
 
     const handleNumberChange = (value: number) => {
         setNumberValue(value);
     };
 
-    console.log('valor numerico', numberValue)
+
     const onSubmit = handleSubmit(async (dataForm) => {
+
+        setLoading(true);
+        const confirmation = toast.loading("Por favor espere...");
+
         try {
             const postData = {
                 name: dataForm.name,
                 quantity: numberValue,
-                userId: data?.user.id ,
+                userId: data?.user.id,
             };
 
-           const response = await axios.post('api/materials', postData);
+            const { success, errorMessage } = await usePostMaterial(postData);
 
-            console.log(response.data);
-            toast.success('🐹 Mascota registrada!')
-            reset();
-        } catch (error) {
-            console.error('Error submitting form:', error);
-            toast.error('💀 Error submitting form');
+            if (success) {
+                await mutate(API_ROUTES.materials);
+                toast.update(confirmation, { render: "Role modificado", type: "success", isLoading: false, autoClose: 1000 });
+            } else {
+                console.error('Error actualizando usuario:', errorMessage);
+                toast.update(confirmation, { render: errorMessage, type: "error", isLoading: false, autoClose: 1000 });
+            }
+
+
         } finally {
+            setLoading(false);
             setShowChangeConfirmation(false);
             setDialogOpen(false);
+            reset();
         }
+    })
 
-    });
 
 
-    
-  
+
 
     const handleCancel = () => {
         setShowCancelConfirmation((prev) => !prev);

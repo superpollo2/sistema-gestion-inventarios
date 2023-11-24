@@ -1,4 +1,3 @@
-import { Dialog, DialogContent, DialogTitle, MenuItem } from "@mui/material"
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { User } from "prisma/prisma-client";
 import { SelectOne } from "@/components/general/SelecteMenuRole";
@@ -9,7 +8,6 @@ import { PrimaryActionButton } from "@/components/ui/Buttons/PrimaryActionButton
 import ConfirmationDialog from "./ConfirmationDialog";
 import { usePutUserRole } from "@/hooks/usePutUserRole";
 import { DialogBase } from "./DialogBase";
-import { useGetRoles } from "@/hooks/useGetRoles";
 
 interface ChangeRoleUserProps {
     open: boolean
@@ -21,7 +19,6 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
 
     const roleUser = user.roleId;
     const [loading, setLoading] = useState(false);
-    const {roles} = useGetRoles();
     const [formData, setFormData] = useState<{ roleId: string | null }>({
         roleId: roleUser
     });
@@ -58,7 +55,7 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
 
     const handleConfirmChangeRole = async () => {
         setLoading(true);
-        const confirmation = toast.loading("Please wait...");
+        const confirmation = toast.loading("Por favor espere...");
 
         try {
             const { success, errorMessage } = await usePutUserRole(user?.id, formData?.roleId ?? '');

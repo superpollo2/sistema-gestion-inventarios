@@ -21,7 +21,7 @@ const materialsApi = async (
         }
 
         if (req.method === 'POST') {
-            const { dataPost } = req.body;
+            const dataPost  = req.body;
             if (!dataPost.name || !dataPost.quantity || !dataPost.userId) {
                 return res.status(400).json({ message: 'Missing required fields' });
             }else {
@@ -64,8 +64,6 @@ const materialsApi = async (
         }
         return res.status(405).json({ message: 'Method not allowed' });
     } catch (error) {
-        console.error(error)
-        console.log(req.body);
         return res.status(500).json({ message: 'Internal server error '});
     }
 };
