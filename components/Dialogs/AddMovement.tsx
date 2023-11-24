@@ -73,7 +73,7 @@ const AddMovement = ({ open, setDialogOpen, material, materialId }: deliverables
 
                 <DialogContent className="  flex flex-col items-center">
                     <div className="text-slate-200 pb-3 font-light text-md">
-                        <h1>Cantidad del material</h1>
+                        <h1>Cantidad del Material</h1>
                     </div>
 
                     <TextField value={numberValue} onChange={handleNumberChange} />
