@@ -15,13 +15,13 @@ import { Material } from "@prisma/client";
 const inventory = () => {
 
   const { materials, isLoading } = useGetMaterials();
+  const [material, setMaterial] = useState("");
   const [materialId, setMaterialId] = useState("");
   const [materialData, setMaterialData] = useState<Material | null>(null); // [materialId, setMaterialId
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const { inventories } = useGetInventories(materialId);
   
-  const nameMaterial = materials?.find((r) => r.id === materialId )?.name ?? "";
-  
+  const nameMaterial = materials?.find((r) => r.id === materialId )?.name ?? ""; 
   const handleMaterialChange = (e: { target: { value: any; }; }) => {
     const selectedId = e.target.value;
     const selectedMaterial = materials.find((mat) => mat.id === selectedId);
@@ -67,8 +67,8 @@ const inventory = () => {
         )
         }
         <GraphInventory />
+        <AddMovement material={nameMaterial} open={dialogOpen} setDialogOpen={setDialogOpen} materialId={material} />
 
-        <AddMovement material={nameMaterial} open={dialogOpen} setDialogOpen={setDialogOpen} />
       </div>
     </PrivateRoute >
 
