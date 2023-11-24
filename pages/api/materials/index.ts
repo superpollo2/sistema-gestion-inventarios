@@ -1,6 +1,6 @@
 import prisma from '@/services/prisma';
 import { checkPrivateApi } from '@/utils/checkServerSession';
-import { Material } from '@prisma/client';
+import { Enum_MovementType, Material } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 interface ResponseData {
@@ -21,32 +21,52 @@ const materialsApi = async (
         }
 
         if (req.method === 'POST') {
-            const { data } = req.body;
+            const { dataPost } = req.body;
+            if (!dataPost.name || !dataPost.quantity || !dataPost.userId) {
+                return res.status(400).json({ message: 'Missing required fields' });
+            }else {
+
+                return await prisma.$transaction(async (tx) =>{
+                    const newMaterial = await tx.material.create({
+                        data: {
+                            name: dataPost.name,
+                            quantity: dataPost.quantity,
+                            createdBy: {
+                                connect: {
+                                    id: dataPost.userId
+                                },
+                            }
+                        },
+                    });
+                    await tx.inventoryMovement.create({
+                        data: {
+                            material: {
+                                connect: {
+                                    id: newMaterial?.id
+                                },
+                            },
+                            quantity: newMaterial?.quantity,
+                            movementType: Enum_MovementType.ENTRADA,
+                            createdBy: {
+                                connect: {
+                                    id: dataPost.userId
+                                },
+                            }
+                        }
+                    });
+                    return res.status(201).json({ newMaterial });
+                }
+    
+                );
+            }
 
             // Crea un nuevo material y su movimiento en inventario
-            const newMaterial = await prisma.material.create({
-                data: {
-                    name: data.name,
-                    quantity: data.quantity,
-                    userId: data.userId,
-                    movements: {
-                        create: {
-                            movementType: data.movementType,
-                            quantity: data.quantity,
-                            userId: data.userId,
-                        },
-                    },
-                },
-                include: {
-                    movements: true,
-                },
-            });
-
-            return res.status(201).json({ newMaterial });
         }
         return res.status(405).json({ message: 'Method not allowed' });
-    } catch {
-        return res.status(500).json({ message: 'Internal server error' });
+    } catch (error) {
+        console.error(error)
+        console.log(req.body);
+        return res.status(500).json({ message: 'Internal server error '});
     }
 };
 

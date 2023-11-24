@@ -1,6 +1,5 @@
 import { useSession } from "next-auth/react";
 import { SingIn } from "./ui/SingIn/SingIng";
-import { ProtectedComponent } from "./ProtectedComponent";
 
 
 interface SingInProps {
@@ -10,9 +9,9 @@ const PrivateRoute = ({ children }: SingInProps) => {
   const { status } = useSession();
 
   return (
-    <div className=" w-screen ">
+    <div className=" w-full ">
       {status === "authenticated" ? (
-        <div className="flex items-center justify-center w-full h-full bg-slate-50">
+        <div className="flex items-center justify-center w-full h-full  bg-slate-50">
             {children}      
         </div>
       ) : (

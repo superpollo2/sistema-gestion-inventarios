@@ -1,4 +1,3 @@
-import { Dialog, DialogContent, DialogTitle } from "@mui/material"
 import { useSession } from "next-auth/react";
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { PrimaryActionButton } from "../ui/Buttons/PrimaryActionButton";
@@ -6,9 +5,8 @@ import { TextField } from "@/components/general/TextField";
 import { toast } from "react-toastify";
 import ConfirmationDialog from "./ConfirmationDialog";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { DialogBase } from "./DialogBase";
-
+import axios from "axios";
 interface ChangeRoleUserProps {
     open: boolean
     setDialogOpen: Dispatch<SetStateAction<boolean>>
@@ -26,17 +24,25 @@ const CreateNewMaterialDialog = ({ open, setDialogOpen }: ChangeRoleUserProps) =
         formState: { errors },
     } = useForm();
 
+    const [showChangeConfirmation, setShowChangeConfirmation] = useState(false);
+    const [showCancelConfirmation, setShowCancelConfirmation] = useState(false);
 
+    const [numberValue, setNumberValue] = useState<number>(0);
 
+    const handleNumberChange = (value: number) => {
+        setNumberValue(value);
+    };
+
+    console.log('valor numerico', numberValue)
     const onSubmit = handleSubmit(async (dataForm) => {
         try {
             const postData = {
                 name: dataForm.name,
-                quantity: numberValue.toString(),
-                createdBy: data?.user.id,
+                quantity: numberValue,
+                userId: data?.user.id ,
             };
 
-            const response = await axios.post('api/materials', postData);
+           const response = await axios.post('api/materials', postData);
 
             console.log(response.data);
             toast.success('🐹 Mascota registrada!')
@@ -52,14 +58,8 @@ const CreateNewMaterialDialog = ({ open, setDialogOpen }: ChangeRoleUserProps) =
     });
 
 
-    const [showChangeConfirmation, setShowChangeConfirmation] = useState(false);
-    const [showCancelConfirmation, setShowCancelConfirmation] = useState(false);
-
-    const [numberValue, setNumberValue] = useState<number>(0);
-
-    const handleNumberChange = (value: number) => {
-        setNumberValue(value);
-    };
+    
+  
 
     const handleCancel = () => {
         setShowCancelConfirmation((prev) => !prev);
@@ -114,6 +114,8 @@ const CreateNewMaterialDialog = ({ open, setDialogOpen }: ChangeRoleUserProps) =
                                 value={numberValue}
                                 onChange={handleNumberChange} />
                         </div>
+
+
                     </div>
 
                     <div className="flex flex-row justify-center gap-4 mb-5">
