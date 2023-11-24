@@ -1,106 +1,44 @@
-import {
-    Chart,
-    Series,
-    ArgumentAxis,
-    CommonSeriesSettings,
-    Export,
-    Legend,
-    Margin,
-    Title,
-    Subtitle,
-    Tooltip,
-    Grid,
-  } from 'devextreme-react/chart';
 import React from 'react';
+
+import { Chart, Series } from 'devextreme-react/chart';
+
+const dataEvolutionMovement = [{
+  day: 'Hoy',
+  Salidas: 3,
+  Entradas: 6,
+  Saldo: 9
+}];
 
 const GraphInventory = () => {
 
-    const energySources = [
-        { value: 'NombreMaterial', name: 'NombreMaterial' },
-      ];
-    
-      const countriesInfo = [{
-        country: '01-12-2023',
-        NombreMaterial: 25
-      },
-      {
-        country: '01-13-2023',
-        NombreMaterial: 36
-      },
-      {
-        country: '01-14-2023',
-        NombreMaterial: 125
-      },
-      {
-        country: '01-15-2023',
-        NombreMaterial: 200
-      },
-      {
-        country: '01-16-2023',
-        NombreMaterial: 35
-      },
-      {
-        country: '01-17-2023',
-        NombreMaterial: 0
-      },
-      {
-        country: '01-18-2023',
-        NombreMaterial: 1
-      },
-      {
-        country: '01-19-2023',
-        NombreMaterial: 35
-      },
-      {
-        country: '01-20-2023',
-        NombreMaterial: 174
-      },
-      {
-        country: '01-21-2023',
-        NombreMaterial: 97
-      },
-      {
-        country: '01-22-2023',
-        NombreMaterial: 100
-      },];
 
-    return (
-        <div>
-            <Chart
-                        palette="Violet"
-                        dataSource={countriesInfo}
-                    >
-                        <CommonSeriesSettings
-                            argumentField="country"
-                            type='line'
-                        />
-                        {
-                            energySources.map((item) => <Series
-                                key={item.value}
-                                valueField={item.value}
-                                name={item.name} />)
-                        }
-                        <Margin bottom={20} />
-                        <ArgumentAxis
-                            valueMarginsEnabled={false}
-                            discreteAxisDivisionMode="crossLabels"
-                        >
-                            <Grid visible={true} />
-                        </ArgumentAxis>
-                        <Legend
-                            verticalAlignment="bottom"
-                            horizontalAlignment="center"
-                            itemTextPosition="bottom"
-                        />
-                        <Export enabled={true} />
+  return (
+    <div>
+      <Chart id="chart" dataSource={dataEvolutionMovement}>
+        <Series
+          valueField="Salidas"
+          argumentField="day"
+          name="Salidas Totales Diarias"
+          type="bar"
+          color="#ffaa66" />
+        
+        <Series
+          valueField="Entradas"
+          argumentField="day"
+          name="Entradas Totatales Diarias"
+          type="bar"
+          color="#ff0000" />
+        
+        <Series
+          valueField="Saldo"
+          argumentField="day"
+          name="Saldo total Actual del Material"
+          type="bar"
+          color="#008000" />
+      </Chart>
+    </div>
+  )
 
-                        <Title text="Evolución de saldos diaría">
-                            <Subtitle text="Total de saldos del Material" />
-                        </Title>
-                        <Tooltip enabled={true} />
-                    </Chart>
-        </div>
-    )
 }
 
 export { GraphInventory }
