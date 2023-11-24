@@ -13,23 +13,21 @@ const SelecMenu = () => {
   };
 
   return (
-    <Box sx={{ minWidth: 200}}  className='bg-slate-100 rounded-md'>
-      <FormControl fullWidth >
-        
-        <InputLabel id="material-select" className='font-semibold text-slate-600'>Tipo de Movimiento</InputLabel>
+    <Box >
+      <FormControl variant="filled" sx={{ m: 1, minWidth: 120, height: 50 }} className='bg-white rounded-lg'>
+        <InputLabel id="demo-simple-select-filled-label">Tipo </InputLabel>
         <Select
-          labelId="material-select"
+          labelId="matrial-select-label"
           id="material"
           value={material}
-          label="Material"
           onChange={handleChange}
         >
           <MenuItem value={1}>Entrada</MenuItem>
           <MenuItem value={2}>Salida</MenuItem>
         </Select>
-
       </FormControl>
     </Box>
+   
   );
 }
 

@@ -7,6 +7,7 @@ import { Load } from "@/components/general/Load";
 import { GraphInventory } from "@/components/ui/Graph/GraphInventory";
 import { Button } from "@/components/ui/Buttons/Button";
 import { AddMovement } from "@/components/Dialogs/AddMovement";
+import { Material } from "@prisma/client";
 
 
 
@@ -14,17 +15,25 @@ import { AddMovement } from "@/components/Dialogs/AddMovement";
 const inventory = () => {
 
   const { materials, isLoading } = useGetMaterials();
-  const [material, setMaterial] = useState("");
+  const [materialId, setMaterialId] = useState("");
+  const [materialData, setMaterialData] = useState<Material | null>(null); // [materialId, setMaterialId
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
-  const { inventories } = useGetInventories(material);
+  const { inventories } = useGetInventories(materialId);
   
-  const nameMaterial = materials?.find((r) => r.id === material )?.name ?? "";
+  const nameMaterial = materials?.find((r) => r.id === materialId )?.name ?? "";
   
+  const handleMaterialChange = (e: { target: { value: any; }; }) => {
+    const selectedId = e.target.value;
+    const selectedMaterial = materials.find((mat) => mat.id === selectedId);
+
+    setMaterialId(selectedId);
+    setMaterialData(selectedMaterial as Material);
+  };
 
   const handleAddMovementDialogClick = () => {
     setDialogOpen(true)
   }
-
+  
   return (
     <PrivateRoute >
       <div className="flex flex-col gap 2 w-4/5">
@@ -32,10 +41,8 @@ const inventory = () => {
         <div className="flex flex-row  gap-4">
 
           <select
-            value={material}
-            onChange={(e) => {
-              setMaterial(e.target.value);
-            }}
+            value={materialId}
+            onChange={handleMaterialChange}
             className=" border-none bg-[#E85D04] px-2 text-slate-200 rounded-md"
           >
             {materials.map((mat) =>
@@ -47,21 +54,18 @@ const inventory = () => {
 
         </div>
 
-        {material === '' ? (
+        {materialId === '' ? (
           <span className=" my-3 text-slate-600 text-lg">Seleccione un material</span>
         ) : (
 
           isLoading ? (
             <Load />
           ) : (
-            <TableInventory inventaries={inventories} />
+            <TableInventory inventaries={inventories} material={materialData} />
           )
 
         )
         }
-
-
-
         <GraphInventory />
 
         <AddMovement material={nameMaterial} open={dialogOpen} setDialogOpen={setDialogOpen} />

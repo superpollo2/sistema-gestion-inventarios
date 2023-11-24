@@ -1,6 +1,6 @@
 import prisma from '@/services/prisma';
 import { checkPrivateApi } from '@/utils/checkServerSession';
-import { Material } from '@prisma/client';
+import { Enum_MovementType, Material } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 interface ResponseData {
@@ -21,30 +21,52 @@ const materialsApi = async (
         }
 
         if (req.method === 'POST') {
-            const { name, quantity, userId } = req.body;
-
-            // Validar que los campos requeridos estén presentes en el cuerpo de la solicitud
-            if (!name || !quantity || !userId) {
+            const { dataPost } = req.body;
+            if (!dataPost.name || !dataPost.quantity || !dataPost.userId) {
                 return res.status(400).json({ message: 'Missing required fields' });
+            }else {
+
+                return await prisma.$transaction(async (tx) =>{
+                    const newMaterial = await tx.material.create({
+                        data: {
+                            name: dataPost.name,
+                            quantity: dataPost.quantity,
+                            createdBy: {
+                                connect: {
+                                    id: dataPost.userId
+                                },
+                            }
+                        },
+                    });
+                    await tx.inventoryMovement.create({
+                        data: {
+                            material: {
+                                connect: {
+                                    id: newMaterial?.id
+                                },
+                            },
+                            quantity: newMaterial?.quantity,
+                            movementType: Enum_MovementType.ENTRADA,
+                            createdBy: {
+                                connect: {
+                                    id: dataPost.userId
+                                },
+                            }
+                        }
+                    });
+                    return res.status(201).json({ newMaterial });
+                }
+    
+                );
             }
 
-            const newMaterial = await prisma.material.create({
-                data: {
-                    name: name,
-                    quantity: parseInt(quantity),
-                    createdBy: {
-                        connect: {
-                            id: userId,
-                        },
-                    },
-                },
-            });
-
-            return res.status(201).json({ newMaterial });
+            // Crea un nuevo material y su movimiento en inventario
         }
         return res.status(405).json({ message: 'Method not allowed' });
-    } catch {
-        return res.status(500).json({ message: 'Internal server error' });
+    } catch (error) {
+        console.error(error)
+        console.log(req.body);
+        return res.status(500).json({ message: 'Internal server error '});
     }
 };
 

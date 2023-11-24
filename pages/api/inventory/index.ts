@@ -25,6 +25,9 @@ const inventoriesApi = async (
 
             return res.status(200).json({ inventories });
             
+        } if (req.method === 'POST'){
+
+            
         }
         return res.status(405).json({ message: 'Method not allowed' });
     } catch {

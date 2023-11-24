@@ -10,7 +10,6 @@ const useGetMaterials = () => {
         fetcher
     );
     
-    console.log(data?.materials)
 
     return {
       materials: data?.materials ?? [] as Material[],
