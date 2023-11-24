@@ -27,6 +27,9 @@ const inventoriesApi = async (
 
             return res.status(200).json({ inventories });
             
+        } if (req.method === 'POST'){
+
+            
         }
 
         if (req.method === 'POST') {

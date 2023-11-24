@@ -9,6 +9,9 @@ import { toast } from "react-toastify";
 import { mutate } from "swr";
 import { useSession } from "next-auth/react";
 
+import { DialogBase } from "./DialogBase";
+
+
 interface deliverablesDialogProps {
     open: boolean
     setDialogOpen: Dispatch<SetStateAction<boolean>>
@@ -27,6 +30,7 @@ const AddMovement = ({ open, setDialogOpen, material, materialId }: deliverables
     const handleNumberChange = (value: number) => {
         setNumberValue(value);
     };
+
 
     //Capturar el valor del tipoMovement
     const handleTipoMovementChange = (value: string) => {
@@ -59,34 +63,33 @@ const AddMovement = ({ open, setDialogOpen, material, materialId }: deliverables
         }
     }
 
+    
+    console.log(material)
     return (
-        <Dialog open={open}>
-            <div className='flex flex-col px-4 py-2 items-center bg-[#03071E] '>
+        <DialogBase open={open} title={material}>
+            <div className="space-y-4 flex flex-col">
 
-                <DialogTitle className='font-bold text-white'>
-                    {material}
-                </DialogTitle>
-
-                <DialogContent>
+                <div className="text-slate-200 font-light text-md flex flex-col justify-center items-center space-y-2">
+                    <label>Selecciona un movimiento</label>
                     <SelecMenu onTipoMovementChange={handleTipoMovementChange} />
-                </DialogContent>
-
-                <DialogContent className="  flex flex-col items-center">
-                    <div className="text-slate-200 pb-3 font-light text-md">
-                        <h1>Cantidad del Material</h1>
-                    </div>
-
+                </div>
+                <div className="text-slate-200 pb-3 font-light text-md flex flex-col justify-center items-center space-y-2">
+                    <label>Cantidad del material</label>
                     <TextField value={numberValue} onChange={handleNumberChange} />
-                </DialogContent>
-
-                <div className="flex flex-row gap-4 mb-5">
+                </div>
+                <div className="flex flex-row gap-4 mb-5 justify-center">
                     <Button text="Guardar" type="secondary" handleClick={handleConfirmAddMovement} />
+
                     <Button text="Cancelar" type="secondary" handleClick={
                         () => { setDialogOpen(false) }
                     } />
                 </div>
             </div>
-        </Dialog>
+        </DialogBase>
+
+
+
+
     );
 };
 

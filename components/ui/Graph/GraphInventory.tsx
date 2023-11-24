@@ -11,6 +11,7 @@ const dataEvolutionMovement = [{
 
 const GraphInventory = () => {
 
+
   return (
     <div>
       <Chart id="chart" dataSource={dataEvolutionMovement}>
@@ -37,6 +38,7 @@ const GraphInventory = () => {
       </Chart>
     </div>
   )
+
 }
 
 export { GraphInventory }

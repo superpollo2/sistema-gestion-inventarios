@@ -18,6 +18,6 @@
     },
     "types": ["node", "jest", "@testing-library/jest-dom"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/Inventory"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/inventory"],
   "exclude": ["node_modules"]
 }

@@ -1,20 +1,27 @@
+import { useGetMaterials } from "@/hooks/useGetMaterials";
 import { useGetUsers } from "@/hooks/useGetUsers";
-import { InventoryMovement } from "@prisma/client";
+import { InventoryMovement, Material } from "@prisma/client";
 import React from "react";
+import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 
 interface TableProps {
   inventaries: InventoryMovement[];
+  material: Material | null
 }
 
-const TableInventory = ({ inventaries }: TableProps) => {
+const TableInventory = ({ inventaries, material }: TableProps) => {
   const { users } = useGetUsers();
+  
+
+  
+
   return (
     <table className="bg-white  border-collapse rounded-xl border text-center border-slate-500 table-auto ">
       <thead className="bg-zinc-100 ">
         <tr>
           <th>Identificador</th>
-          <th>Entrada</th>
-          <th>Salida</th>
+          <th>Movimiento</th>
+          <th>Saldo</th>
           <th>Responsable</th>
         </tr>
       </thead>
@@ -22,12 +29,15 @@ const TableInventory = ({ inventaries }: TableProps) => {
         {inventaries?.map((inventory) => (
           <tr key={inventory.id}>
             <td>{inventory.id}</td>
-            <td>
-              {inventory.movementType === "ENTRADA" ? inventory.quantity : ""}
+            <td className="flex items-center justify-center space-x-4">
+              <span>{inventory.quantity}</span>
+              {inventory.movementType === "ENTRADA" ? (
+                <AiFillCaretUp className="text-green-500 text-2xl" />
+              ) : inventory.movementType === "SALIDA" ? (
+                <AiFillCaretDown className="text-red-500 text-2xl" />
+              ) : null /* <- Aquí estaba el error de sintaxis, se agregó el cierre de paréntesis correctamente */}
             </td>
-            <td>
-              {inventory.movementType === "SALIDA" ? inventory.quantity : ""}
-            </td>
+            <td>Acá la cantidad en el material</td>
             <td>{users?.find((r) => r.id === inventory.userId)?.name ?? ""}</td>
           </tr>
         ))}
