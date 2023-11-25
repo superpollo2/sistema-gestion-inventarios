@@ -30,12 +30,15 @@ const TableInventory = ({ inventaries, material }: TableProps) => {
           <tr key={inventory.id}>
             <td>{inventory.id}</td>
             <td className="flex items-center justify-center space-x-4">
-              <span>{inventory.quantity}</span>
+              <div className="w-[80%]">{inventory.quantity}</div>
+              <div className="w-[10%] flex items-center justify-cener">
               {inventory.movementType === "ENTRADA" ? (
                 <AiFillCaretUp className="text-green-500 text-2xl" />
               ) : inventory.movementType === "SALIDA" ? (
                 <AiFillCaretDown className="text-red-500 text-2xl" />
-              ) : null /* <- Aquí estaba el error de sintaxis, se agregó el cierre de paréntesis correctamente */}
+              ) : null}
+
+              </div>
             </td>
             <td>Acá la cantidad en el material</td>
             <td>{users?.find((r) => r.id === inventory.userId)?.name ?? ""}</td>

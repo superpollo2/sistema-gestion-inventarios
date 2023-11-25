@@ -10,9 +10,9 @@ const SidebarNavigation = () => {
     return (
         <nav
             aria-label="side navigation"
-            className="flex-1  divide-y divide-slate-100 overflow-auto pt-5 bg-[#03071E]"
+            className="flex-1 justify-center divide-y divide-slate-100 overflow-auto pt-5 bg-[#03071E]"
         >
-            <div className="">
+            
                 <ul className=" flex flex-col py-5 gap-6 items-center">
                     {data?.user.role?.name === "ADMIN" && (
                         <>
@@ -32,7 +32,7 @@ const SidebarNavigation = () => {
                     </LinkItem>
 
                 </ul>
-            </div>
+            
         </nav >
     );
 };

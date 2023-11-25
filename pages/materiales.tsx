@@ -9,6 +9,7 @@ import { CreateNewMaterialDialog } from "@/components/Dialogs/CreateNewMaterialD
 const materials = () => {
 
 
+
   const { materials, isLoading } = useGetMaterials();
 
   const [newMaterialOpen, setNewMaterialOpen] = useState(false);
@@ -21,20 +22,22 @@ const materials = () => {
   return (
 
     <PrivateRoute >
-      <div>
-        <div className="p-8 pl-0">
-          <h1 className="titulo pl-1">Materiales</h1>
-        </div>
 
-        <Button text="Agregar un Movimiento" type={"primary"} handleClick={handleOpenNewRole} />
-
-        {isLoading ? (
-          <Load />
-        ) : (
+      {isLoading ? (
+        <Load />
+      ) : (
+        <div>
+          <div className=" space-y-3 mb-5">
+            <h1 className="titulo ">Materiales</h1>
+            <Button text="Agregar un Movimiento" type={"primary"} handleClick={handleOpenNewRole} />
+          </div>
+         
+         
           <TableMaterials materials={materials} />
-        )
-        }
-      </div>
+        </div>
+      )
+      }
+
       {newMaterialOpen && (
         <CreateNewMaterialDialog
           open={newMaterialOpen}

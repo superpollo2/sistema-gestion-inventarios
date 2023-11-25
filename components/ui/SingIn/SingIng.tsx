@@ -5,8 +5,8 @@ const SingIn = () => {
     <div className="h-screen w-full flex flex-row ">
 
       <aside className=" w-8/12 bg-white flex flex-col  items-center justify-center">
-        <div className="pl-14">
-          <h1 className=" font-bold text-start text-6xl text-[#03071E] mb-4">
+        <div className="pl-14 flex flex-col items-center justify-center">
+          <h1 className=" font-bold text-center text-6xl text-[#03071E] mb-4">
             Bienvenido al Sistema de Gestión de Inventarios
           </h1>
           <p className="text-[#E85D04]  text-2xl"> Ingeniería Web MJ 2023-2 </p>

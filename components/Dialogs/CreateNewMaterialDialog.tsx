@@ -20,17 +20,11 @@ const CreateNewMaterialDialog = ({ open, setDialogOpen }: ChangeRoleUserProps) =
 
     const [showChangeConfirmation, setShowChangeConfirmation] = useState(false);
     const [showCancelConfirmation, setShowCancelConfirmation] = useState(false);
+    const [materialName, setMaterialName] = useState('');
     const [loading, setLoading] = useState(false);
     const [numberValue, setNumberValue] = useState<number>(0);
 
     const { data } = useSession();
-
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-    } = useForm();
 
 
     const handleNumberChange = (value: number) => {
@@ -38,14 +32,16 @@ const CreateNewMaterialDialog = ({ open, setDialogOpen }: ChangeRoleUserProps) =
     };
 
 
-    const onSubmit = handleSubmit(async (dataForm) => {
+
+    const handleConfirmCreateMaterial = async () => {
+
 
         setLoading(true);
         const confirmation = toast.loading("Por favor espere...");
 
         try {
             const postData = {
-                name: dataForm.name,
+                name: materialName,
                 quantity: numberValue,
                 userId: data?.user.id,
             };
@@ -54,9 +50,9 @@ const CreateNewMaterialDialog = ({ open, setDialogOpen }: ChangeRoleUserProps) =
 
             if (success) {
                 await mutate(API_ROUTES.materials);
-                toast.update(confirmation, { render: "Role modificado", type: "success", isLoading: false, autoClose: 1000 });
+                toast.update(confirmation, { render: "Material Creado", type: "success", isLoading: false, autoClose: 1000 });
             } else {
-                console.error('Error actualizando usuario:', errorMessage);
+                console.error('Errorcreando usuario:', errorMessage);
                 toast.update(confirmation, { render: errorMessage, type: "error", isLoading: false, autoClose: 1000 });
             }
 
@@ -65,13 +61,9 @@ const CreateNewMaterialDialog = ({ open, setDialogOpen }: ChangeRoleUserProps) =
             setLoading(false);
             setShowChangeConfirmation(false);
             setDialogOpen(false);
-            reset();
+
         }
-    })
-
-
-
-
+    }
 
     const handleCancel = () => {
         setShowCancelConfirmation((prev) => !prev);
@@ -88,7 +80,6 @@ const CreateNewMaterialDialog = ({ open, setDialogOpen }: ChangeRoleUserProps) =
 
     const handleDesertCancel = () => {
         setShowCancelConfirmation(false);
-        // Puedes agregar lógica adicional si es necesario
     };
 
 
@@ -96,59 +87,51 @@ const CreateNewMaterialDialog = ({ open, setDialogOpen }: ChangeRoleUserProps) =
         <>
             <DialogBase open={open} title="Nuevo Material">
 
-                <form onSubmit={onSubmit}>
-                    <div className="space-y-4 flex flex-col">
 
-                        <div className="text-slate-200  font-light text-md w-full flex flex-col justify-center items-center space-y-2">
-                            <label >Nombre del material</label>
-                            <input
-                                type="text"
-                                className="border border-gray-400 p-2 font-semibold text-slate-600 text-center bg-slate-100 rounded-md "
-                                placeholder="Ladrillos"
-                                autoComplete="off"
-                                {...register("name", {
-                                    required: {
-                                        value: true,
-                                        message: "El nombre es requerido",
-                                    },
-                                })}
-                            />
-                            {errors.name && errors.name.message ? (
-                                <span className="block text-red-400 text-xs">
-                                    {String(errors.name.message)}
-                                </span>
-                            ) : null}
-                        </div>
+                <div className="space-y-4 flex flex-col">
 
-                        <div className="text-slate-200 pb-3 font-light text-md flex flex-col justify-center items-center space-y-2">
-                            <label>Cantidad</label>
-                            <TextField
-                                value={numberValue}
-                                onChange={handleNumberChange} />
-                        </div>
+                    <div className="text-slate-200  font-light text-md w-full flex flex-col justify-center items-center space-y-2">
+                        <label >Nombre del material</label>
+                        <input
+                            type="text"
+                            id="nombreMaterial"
+                            className="border border-gray-400 p-2 font-semibold text-slate-600 text-center bg-slate-100 rounded-md"
+                            placeholder="Ladrillos"
+                            autoComplete="off"
+                            value={materialName}  
+                            onChange={(e) => setMaterialName(e.target.value)}
 
-
+                        />
                     </div>
 
-                    <div className="flex flex-row justify-center gap-4 mb-5">
-                        <PrimaryActionButton
-                            text='Crear'
-                            type='submit'
-                            onClick={handleChangeRole} loading={false} />
-                        <PrimaryActionButton
-                            text='Cancelar'
-                            type='button'
-                            onClick={handleCancel} loading={false} />
+                    <div className="text-slate-200 pb-3 font-light text-md flex flex-col justify-center items-center space-y-2">
+                        <label>Cantidad</label>
+                        <TextField
+                            value={numberValue}
+                            onChange={handleNumberChange} />
                     </div>
 
-                </form>
+
+                </div>
+
+                <div className="flex flex-row justify-center gap-4 mb-5">
+                    <PrimaryActionButton
+                        text='Crear'
+                        type='submit'
+                        onClick={handleChangeRole} loading={false} />
+                    <PrimaryActionButton
+                        text='Cancelar'
+                        type='button'
+                        onClick={handleCancel} loading={false} />
+                </div>
+
             </DialogBase>
 
 
             <ConfirmationDialog
                 open={showChangeConfirmation}
                 setOpen={setShowChangeConfirmation}
-                onConfirm={handleConfirmCancel}
+                onConfirm={handleConfirmCreateMaterial}
                 onCancel={handleDesertCancel}
                 title="Confirmación de cambio de rol"
                 message="¿Estás seguro de cambiar el rol del usuario?"

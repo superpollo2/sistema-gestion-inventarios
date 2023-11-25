@@ -18,12 +18,13 @@ const SideNavigationUserProfile = () => {
       <aside
         id="nav-menu-4"
         aria-label="Side navigation"
-        className={`top-0 bottom-0 left-0 z-40 flex h-screen flex-col grow border-r border-r-slate-200 bg-white transition-transform lg:translate-x-0 ${isSideNavOpen ? "translate-x-0" : " -translate-x-full"
-          }`}
+        className={`top-0 bottom-0 left-0 z-40 flex h-screen flex-col grow border-r border-r-slate-200 bg-white transition-transform lg:translate-x-0 ${isSideNavOpen ? "translate-x-0" : " -translate-x-full"}`}
       >
+        
         <UserProfile />
         <SidebarNavigation />
         <SideFooter />
+        
       </aside>
 
       <button

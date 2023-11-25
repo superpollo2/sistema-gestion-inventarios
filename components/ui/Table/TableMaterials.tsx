@@ -1,7 +1,7 @@
 import { useGetUsers } from "@/hooks/useGetUsers";
 import React from "react";
 import { Material } from "@prisma/client";
-
+import {formatDate} from "@/utils/formatDate";
 interface TableProps {
   materials: Material[];
 }
@@ -22,9 +22,9 @@ const TableMaterials = ({ materials }: TableProps) => {
       <tbody>
         {materials.map((material) => (
           <tr key={material.id}>
-            <td>{material.id}</td>
-            <td>{material.createdAt.toString()}</td>
-            <td>{material.name}</td>
+            <td >{material.id}</td>
+            <td className=" text-center">{formatDate(material.createdAt.toString())}</td>
+            <td >{material.name}</td>
             <td>{material.quantity}</td>
             <td>{users?.find((r) => r.id === material.userId)?.name ?? ""}</td>
           </tr>

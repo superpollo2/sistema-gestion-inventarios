@@ -6,7 +6,7 @@ const UserProfile = () => {
   const { data, status } = useSession();
 
   return (
-    <div className="flex flex-col items-center gap-4  bg-[#03071E] pt-12 p-6">
+    <div className="flex flex-col items-center gap-4  bg-[#03071E] pt-12 p-">
       {status === "authenticated" && (
         <>
           <div className="relative pt-4">
@@ -16,7 +16,7 @@ const UserProfile = () => {
               title="user name"
               width={70}
               height={70}
-              className="rounded-full" />
+              className="rounded-full mt-40" />
             <span className="absolute bottom-0 right-0 inline-flex items-center justify-center gap-1 rounded-full  bg-emerald-500 p-1 text-sm text-white">
               <span className="sr-only"> online </span>
             </span>

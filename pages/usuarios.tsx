@@ -19,7 +19,7 @@ const users = () => {
             <Load />
           ) : (
             <>
-              <div className="p-8 pl-0">
+              <div className="mb-5 pl-0">
                 <h1 className="titulo pl-1 "> Usuarios registrados</h1>
               </div>
               <TableUsers users={users} />

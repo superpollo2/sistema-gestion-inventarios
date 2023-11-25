@@ -6,7 +6,7 @@ th {
   @apply border  p-2;
 }
 td {
-  @apply border-none  py-1 pl-4 px-6 text-slate-600 text-start;
+  @apply border-none  py-1 pl-4 px-6 text-slate-600 text-center;
 }
 
 thead {
@@ -14,7 +14,7 @@ thead {
 }
 
 td:nth-child(2n + 1) {
-  @apply bg-slate-200;
+  @apply bg-slate-200 ;
 }
 
 .titulo {
