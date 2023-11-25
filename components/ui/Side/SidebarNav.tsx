@@ -1,5 +1,4 @@
 import { LinkItem } from "./LinkItem";
-import { HiOutlineChat, HiOutlineUsers, HiOutlineViewGrid } from "react-icons/hi";
 import { PiUsersFill } from "react-icons/pi";
 import { MdInventory2 } from "react-icons/md";
 import { BsFillBoxFill } from "react-icons/bs";

@@ -7,6 +7,10 @@ import { Enum_MovementType, InventoryMovement } from "@prisma/client";
 interface ResponseData {
     inventories?: InventoryMovement[];
     message?: string;
+    day?: string;       // Permitir day en ResponseData
+    Salidas?: number;   // Permitir Salidas en ResponseData
+    Entradas?: number;  // Permitir Entradas en ResponseData
+    Saldo?: number;     // Permitir Saldo en ResponseData
 }
 
 const inventoriesApi = async (
@@ -46,6 +50,7 @@ const inventoriesApi = async (
             if (material === null) {
                 return res.status(400).json({ message: 'Material not exist' })
             }
+            
 
             if (movementType === Enum_MovementType.SALIDA && material?.quantity < quantity) {
                 return res.status(400).json({ message: 'Cantidad no disponible' })
@@ -92,5 +97,34 @@ const inventoriesApi = async (
     }
 
 
+    async function handleGetMaterialSummary(materialName: string, res: NextApiResponse<ResponseData>) {
+        const today = new Date().toLocaleDateString(); // Ajusta el formato de fecha según necesidad
+        const material = await prisma.material.findFirst({
+            where: { name: materialName },
+        });
+    
+        if (!material) {
+            return res.status(404).json({ message: 'Material not found' });
+        }
+    
+        const movements = await prisma.inventoryMovement.findMany({
+            where: { materialId: material.id },
+        });
+    
+        const entradas = movements
+            .filter(m => m.movementType === Enum_MovementType.ENTRADA)
+            .reduce((acc, m) => acc + m.quantity, 0);
+        const salidas = movements
+            .filter(m => m.movementType === Enum_MovementType.SALIDA)
+            .reduce((acc, m) => acc + m.quantity, 0);
+    
+        return res.status(200).json({
+            day: today,
+            Salidas: salidas,
+            Entradas: entradas,
+            Saldo: material.quantity, // Asumiendo que 'quantity' es el saldo actual
+        });
+    }
+    
 };
 export default inventoriesApi;

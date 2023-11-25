@@ -63,8 +63,6 @@ const AddMovement = ({ open, setDialogOpen, material, materialId }: deliverables
         }
     }
 
-    
-    console.log(material)
     return (
         <DialogBase open={open} title={material}>
             <div className="space-y-4 flex flex-col">
