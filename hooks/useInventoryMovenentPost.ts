@@ -23,7 +23,6 @@ const useInvetoryMovement = async (movementType: string, materialId: string, qua
         };
     } catch (error) {
         // Si hay un error, devolver el mensaje de error
-        console.log(error)
         return { 
             success: false, 
             errorMessage: 'Error Añadiendo el movimiento' };

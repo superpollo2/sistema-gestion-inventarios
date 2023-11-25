@@ -36,8 +36,10 @@ const inventory = () => {
 
   return (
     <PrivateRoute >
-      <div className="flex flex-col gap 2 w-4/5">
+      <div className="flex flex-col gap-4 w-4/5">
+
         <h1 className="titulo my-4">Inventory Page</h1>
+
         <div className="flex flex-row  gap-4">
 
           <select
@@ -54,19 +56,27 @@ const inventory = () => {
 
         </div>
 
-        {materialId === '' ? (
-          <span className=" my-3 text-slate-600 text-lg">Seleccione un material</span>
-        ) : (
-
-          isLoading ? (
-            <Load />
+        <div className="flex flex-col gap-3">
+          {materialId === '' ? (
+            <span className=" my-3 text-slate-600 text-lg">Seleccione un material</span>
           ) : (
-            <TableInventory inventaries={inventories} material={materialData} />
-          )
 
-        )
-        }
-        <GraphInventory />
+            isLoading ? (
+              <Load />
+            ) : (
+              <TableInventory inventaries={inventories} material={materialData} />
+            )
+
+          )
+          }
+
+          <div className="fle flex-col gap-2">
+            <span className="titulo">Gráfica de evolución de saldos</span>
+            <GraphInventory />
+          </div>
+
+        </div>
+
         <AddMovement material={nameMaterial} open={dialogOpen} setDialogOpen={setDialogOpen} materialId={materialId} />
 
       </div>

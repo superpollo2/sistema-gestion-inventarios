@@ -7,6 +7,10 @@ import { Enum_MovementType, InventoryMovement } from "@prisma/client";
 interface ResponseData {
     inventories?: InventoryMovement[];
     message?: string;
+    day?: string;       // Permitir day en ResponseData
+    Salidas?: number;   // Permitir Salidas en ResponseData
+    Entradas?: number;  // Permitir Entradas en ResponseData
+    Saldo?: number;     // Permitir Saldo en ResponseData
 }
 
 const inventoriesApi = async (

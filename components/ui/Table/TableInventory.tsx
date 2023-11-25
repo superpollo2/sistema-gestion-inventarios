@@ -16,8 +16,8 @@ const TableInventory = ({ inventaries, material }: TableProps) => {
   
 
   return (
-    <table className="bg-white  border-collapse rounded-xl border text-center border-slate-500 table-auto ">
-      <thead className="bg-zinc-100 ">
+    <table className="text-center border-separate border-spacing-1 table-auto">
+      <thead className="px-4 ">
         <tr>
           <th>Identificador</th>
           <th>Movimiento</th>
