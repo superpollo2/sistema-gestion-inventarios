@@ -1,5 +1,6 @@
+
 interface ButtonProps {
-    text: String
+    text: string
     type: string
     handleClick?: () => void
 }

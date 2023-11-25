@@ -1,4 +1,3 @@
-import { useGetMaterials } from "@/hooks/useGetMaterials";
 import { useGetUsers } from "@/hooks/useGetUsers";
 import { InventoryMovement, Material } from "@prisma/client";
 import React from "react";
@@ -12,9 +11,6 @@ interface TableProps {
 const TableInventory = ({ inventaries, material }: TableProps) => {
   const { users } = useGetUsers();
   
-
-  
-
   return (
     <table className="bg-white  border-collapse rounded-xl border text-center border-slate-500 table-auto ">
       <thead className="bg-zinc-100 ">

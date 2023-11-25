@@ -67,7 +67,6 @@ const ChangeRoleUserDialog = ({ open, setDialogOpen, user }: ChangeRoleUserProps
             } else {
                 // Actualización fallida
                 setFormData({ roleId: roleUser });
-                console.error('Error actualizando usuario:', errorMessage);
                 toast.update(confirmation, { render: errorMessage, type: "error", isLoading: false, autoClose: 1000 });
             }
         } finally {

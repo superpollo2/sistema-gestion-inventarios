@@ -20,11 +20,11 @@ const ProtectedComponent = ({ children, roleName }: ProtectedComponentProps) => 
     }
   }, [data?.user.role?.name, isWarningDisplayed, roleName]);
 
-  if (data?.user.role?.name === roleName) 
-  
+  if (data?.user.role?.name === roleName) return <>{children}</>;
+
   return <h1>no esta autorizado</h1>;
 
-  
+
 };
 
 export { ProtectedComponent };

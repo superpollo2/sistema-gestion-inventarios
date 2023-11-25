@@ -1,10 +1,9 @@
 import { useSession } from "next-auth/react";
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { PrimaryActionButton } from "../ui/Buttons/PrimaryActionButton";
+import { PrimaryActionButton } from "@/components/ui/Buttons/PrimaryActionButton";
 import { TextField } from "@/components/general/TextField";
 import { toast } from "react-toastify";
 import ConfirmationDialog from "./ConfirmationDialog";
-import { useForm } from "react-hook-form";
 import { DialogBase } from "./DialogBase";
 import { mutate } from 'swr';
 import { usePostMaterial } from "@/hooks/usePostMaterial";
@@ -21,9 +20,7 @@ const CreateNewMaterialDialog = ({ open, setDialogOpen }: ChangeRoleUserProps) =
     const [showChangeConfirmation, setShowChangeConfirmation] = useState(false);
     const [showCancelConfirmation, setShowCancelConfirmation] = useState(false);
     const [materialName, setMaterialName] = useState('');
-    const [loading, setLoading] = useState(false);
     const [numberValue, setNumberValue] = useState<number>(0);
-
     const { data } = useSession();
 
 
@@ -36,7 +33,7 @@ const CreateNewMaterialDialog = ({ open, setDialogOpen }: ChangeRoleUserProps) =
     const handleConfirmCreateMaterial = async () => {
 
 
-        setLoading(true);
+      
         const confirmation = toast.loading("Por favor espere...");
 
         try {
@@ -52,13 +49,12 @@ const CreateNewMaterialDialog = ({ open, setDialogOpen }: ChangeRoleUserProps) =
                 await mutate(API_ROUTES.materials);
                 toast.update(confirmation, { render: "Material Creado", type: "success", isLoading: false, autoClose: 1000 });
             } else {
-                console.error('Errorcreando usuario:', errorMessage);
                 toast.update(confirmation, { render: errorMessage, type: "error", isLoading: false, autoClose: 1000 });
             }
 
 
         } finally {
-            setLoading(false);
+            
             setShowChangeConfirmation(false);
             setDialogOpen(false);
 

@@ -1,8 +1,7 @@
-import { Dialog, DialogContent, DialogTitle } from "@mui/material"
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { Button } from "../ui/Buttons/Button";
-import { SelecMenu } from "../general/SelectMenu";
-import { TextField } from "../general/TextField";
+import { Button } from "@/components/ui/Buttons/Button";
+import { SelecMenu } from "@/components/general/SelectMenu";
+import { TextField } from "@/components/general/TextField";
 import { useInvetoryMovement } from "@/hooks/useInventoryMovenentPost"
 import { API_ROUTES } from "@/services/apiConfig";
 import { toast } from "react-toastify";
@@ -24,7 +23,7 @@ const AddMovement = ({ open, setDialogOpen, material, materialId }: deliverables
     const [numberValue, setNumberValue] = useState<number>(0);
     const { data } = useSession();
     const [tipoMovement, setTipoMovement] = useState<string>('');
-    const [loading, setLoading] = useState(false);
+
 
     //Campturar el valor de la cantidad del movimiento, que se hace en el componente selecttMenu
     const handleNumberChange = (value: number) => {
@@ -39,7 +38,7 @@ const AddMovement = ({ open, setDialogOpen, material, materialId }: deliverables
 
     //Petición al back para realizar el POST con los datos del movimiento
     const handleConfirmAddMovement = async () => {
-        setLoading(true);
+
         const confirmation = toast.loading("Please wait...");
 
         
@@ -53,18 +52,15 @@ const AddMovement = ({ open, setDialogOpen, material, materialId }: deliverables
                 await mutate(API_ROUTES.inventory);
                 toast.update(confirmation, { render: "Movimiento añadido", type: "success", isLoading: false, autoClose: 1000 });
             } else {
-                // Actualización fallida
-                console.error('Error Añadiendo el movimiento:', errorMessage);
                 toast.update(confirmation, { render: errorMessage, type: "error", isLoading: false, autoClose: 1000 });
             }
         } finally {
-            setLoading(false);
             setDialogOpen(false);
         }
     }
 
     
-    console.log(material)
+
     return (
         <DialogBase open={open} title={material}>
             <div className="space-y-4 flex flex-col">

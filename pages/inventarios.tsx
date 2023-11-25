@@ -12,10 +12,9 @@ import { Material } from "@prisma/client";
 
 
 
-const inventory = () => {
+const Inventory = () => {
 
   const { materials, isLoading } = useGetMaterials();
-  const [material, setMaterial] = useState("");
   const [materialId, setMaterialId] = useState("");
   const [materialData, setMaterialData] = useState<Material | null>(null); // [materialId, setMaterialId
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
@@ -82,4 +81,4 @@ const inventory = () => {
   );
 };
 
-export default inventory;
+export default Inventory;

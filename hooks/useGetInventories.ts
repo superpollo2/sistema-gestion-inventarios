@@ -10,7 +10,6 @@ const useGetInventories = (material: string) => {
         fetcher
     );
     
-      console.log(`${API_ROUTES.material}${material}`)
     return {
       inventories: data?.inventories ?? [] as InventoryMovement[],
       isLoading,

@@ -6,7 +6,7 @@ import { Load } from "@/components/general/Load";
 import { Button } from "@/components/ui/Buttons/Button";
 import { CreateNewMaterialDialog } from "@/components/Dialogs/CreateNewMaterialDialog";
 
-const materials = () => {
+const Materials = () => {
 
 
 
@@ -51,4 +51,4 @@ const materials = () => {
   );
 };
 
-export default materials;
+export default Materials;

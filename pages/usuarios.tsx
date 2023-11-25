@@ -7,7 +7,7 @@ import { Load } from "@/components/general/Load";
 
 
 
-const users = () => {
+const Users = () => {
 
   const { users, isLoading } = useGetUsers();
 
@@ -33,4 +33,4 @@ const users = () => {
   );
 };
 
-export default users;
+export default Users;
